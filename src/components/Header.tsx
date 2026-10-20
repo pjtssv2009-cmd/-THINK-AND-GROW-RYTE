@@ -126,9 +126,6 @@ export const Header: React.FC = () => {
                       </span>
                       <span className="truncate">{slide.title}</span>
                     </div>
-                    <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border border-[#171717] bg-white text-[#171717] shrink-0 ml-2">
-                      {slide.durationMin}m
-                    </span>
                   </button>
                 ))}
               </div>

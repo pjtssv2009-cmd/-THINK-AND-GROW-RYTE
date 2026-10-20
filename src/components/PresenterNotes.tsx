@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePresentation } from '../context/GameStateContext';
-import { X, Clock, Lightbulb, CheckCircle2 } from 'lucide-react';
+import { X, Lightbulb, CheckCircle2 } from 'lucide-react';
 
 export const PresenterNotes: React.FC = () => {
   const {
@@ -38,7 +38,7 @@ export const PresenterNotes: React.FC = () => {
 
       {/* Body */}
       <div className="p-4 overflow-y-auto space-y-3.5 text-[#171717] text-xs">
-        {/* Slide Info & Timing */}
+        {/* Slide Info */}
         <div className="flex items-center justify-between pb-2.5 border-b-2 border-[#171717]">
           <div>
             <span className="text-[10px] font-mono font-black uppercase tracking-wider text-[#525252]">
@@ -48,10 +48,9 @@ export const PresenterNotes: React.FC = () => {
               {currentSlide.title}
             </h3>
           </div>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#FFF4E5] text-[#171717] rounded border-2 border-[#171717] shadow-[1.5px_1.5px_0px_#171717] font-mono font-bold shrink-0">
-            <Clock className="w-3.5 h-3.5 text-[#F28C28]" />
-            <span>{currentSlide.durationMin}m</span>
-          </div>
+          <span className="text-[10px] font-mono font-black px-2 py-0.5 bg-[#FFF4E5] text-[#171717] rounded border-2 border-[#171717] shadow-[1.5px_1.5px_0px_#171717] uppercase">
+            KEYNOTE
+          </span>
         </div>
 
         {/* Slide Goal */}

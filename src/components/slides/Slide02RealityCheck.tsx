@@ -1,45 +1,39 @@
 import React, { useState } from 'react';
-import { Eye, MousePointer, Volume2, Brain, Sun } from 'lucide-react';
+import { Eye, MousePointer, Volume2, Brain, Sparkles } from 'lucide-react';
 
 export const Slide02RealityCheck: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState<'visual' | 'motor' | 'auditory' | 'cognitive'>('visual');
+  const [activeTab, setActiveTab] = useState<number>(0);
 
-  const categories = [
+  const pillars = [
     {
-      id: 'visual' as const,
       title: 'Visual',
-      icon: <Eye className="w-5 h-5 text-[#F28C28]" />,
-      assistiveTech: 'Screen readers (NVDA, VoiceOver, JAWS), Screen magnifiers, High-contrast OS themes.',
-      barriers: 'Missing programmatic labels, images without alt text, low-contrast text, color-only state indicators.',
-      aiRisk: 'AI scaffolding defaults to visual-only <span> tags and low-contrast pale gray text.'
+      who: 'Blindness, low vision, color blindness',
+      tech: 'Screen readers (NVDA, VoiceOver), screen magnifiers',
+      trap: 'AI uses visual <span> tags instead of <label>, and pale low-contrast grays.',
+      icon: <Eye className="w-5 h-5 text-[#F28C28]" />
     },
     {
-      id: 'motor' as const,
       title: 'Motor & Mobility',
-      icon: <MousePointer className="w-5 h-5 text-[#15803D]" />,
-      assistiveTech: 'Keyboard-only, Sip-and-puff switches, Head pointers, Eye-tracking cameras, Voice dictation.',
-      barriers: 'Interactive elements without keyboard focus rings, clickable <div> elements, trap loops.',
-      aiRisk: 'AI frequently inserts "outline: none" or fails to bind Enter/Space keyboard handlers on custom buttons.'
+      who: 'Tremors, paralysis, RSI, one-handed use',
+      tech: 'Keyboard-only, switch devices, head pointers, eye tracking',
+      trap: 'AI inserts "outline: none" or clickable <div> buttons that Tab skips.',
+      icon: <MousePointer className="w-5 h-5 text-[#15803D]" />
     },
     {
-      id: 'auditory' as const,
       title: 'Auditory',
-      icon: <Volume2 className="w-5 h-5 text-[#D97706]" />,
-      assistiveTech: 'Synchronized captions, Transcripts, Visual flash alerts, Haptic notifications.',
-      barriers: 'Audio-only notifications, video without captions, audio CAPTCHAs without visual fallbacks.',
-      aiRisk: 'Audio cues generated without visual status messages (role="status" or visual badges).'
+      who: 'Deafness, hard of hearing, loud environments',
+      tech: 'Synchronized captions, transcripts, visual status alerts',
+      trap: 'Audio-only notifications with zero visual status cues.',
+      icon: <Volume2 className="w-5 h-5 text-[#D97706]" />
     },
     {
-      id: 'cognitive' as const,
       title: 'Cognitive',
-      icon: <Brain className="w-5 h-5 text-[#B91C1C]" />,
-      assistiveTech: 'Reading modes, Spell checkers, Text-to-speech, Focus highlighting, Consistent nav cues.',
-      barriers: 'Flashing animations, disorienting transitions, strict unforgiving timers, cryptic validation errors.',
-      aiRisk: 'Ambiguous error states ("Invalid input") without specific instructions on how to correct the error.'
+      who: 'ADHD, dyslexia, distraction, cognitive overload',
+      tech: 'Clear layout hierarchy, plain language, predictable navigation',
+      trap: 'Cryptic error messages ("Invalid") without instructions on how to fix.',
+      icon: <Brain className="w-5 h-5 text-[#B91C1C]" />
     }
   ];
-
-  const activeCategory = categories.find(c => c.id === selectedCategory) || categories[0];
 
   return (
     <div className="w-full max-w-5xl mx-auto py-4 sm:py-6 px-4 flex flex-col animate-slide-in">
@@ -49,122 +43,73 @@ export const Slide02RealityCheck: React.FC = () => {
         <span className="text-xs font-mono font-black uppercase tracking-wider text-[#171717] bg-[#FFF4E5] px-3.5 py-1 rounded-md border-2 border-[#171717] shadow-[2px_2px_0px_#171717]">
           FOUNDATIONS • BEYOND THE MOUSE
         </span>
-        <h1 className="text-2xl sm:text-4xl font-black text-[#171717] tracking-tight mt-3 mb-2 uppercase">
+        <h1 className="text-3xl sm:text-4xl font-black text-[#171717] tracking-tight mt-3 mb-2 uppercase">
           WHAT IS WEB ACCESSIBILITY?
         </h1>
-        <p className="text-xs sm:text-sm font-semibold text-[#525252]">
-          Web accessibility (a11y) ensures that everyone—regardless of hardware, sensory ability, motor control, or context—can perceive, understand, navigate, and interact with the web.
+        <p className="text-sm font-bold text-[#525252]">
+          Ensuring digital products can be perceived, navigated, and operated by everyone.
         </p>
       </div>
 
-      {/* 4 Interaction Models Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-        {categories.map((cat) => {
-          const isSelected = selectedCategory === cat.id;
-          return (
-            <button
-              key={cat.id}
-              type="button"
-              onClick={() => setSelectedCategory(cat.id)}
-              className={`p-3.5 rounded-xl border-2 border-[#171717] text-left transition-all flex flex-col justify-between ${
-                isSelected
-                  ? 'bg-[#F28C28] text-[#171717] shadow-[3px_3px_0px_#171717] -translate-x-0.5 -translate-y-0.5'
-                  : 'bg-white hover:bg-[#FFF4E5] text-[#171717] shadow-[2px_2px_0px_#171717]'
-              } focus-visible:outline-3 focus-visible:outline-[#F28C28]`}
-              aria-pressed={isSelected}
-            >
-              <div className="flex items-center justify-between w-full mb-2">
-                <span className="font-black text-sm uppercase">{cat.title}</span>
-                <div className="p-1.5 rounded bg-white border border-[#171717]">
-                  {cat.icon}
+      {/* 4 Clean Visual Pillars (2x2 Grid) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        {pillars.map((p, idx) => (
+          <div 
+            key={idx}
+            className={`p-5 rounded-2xl border-2 border-[#171717] transition-all bg-white shadow-[4px_4px_0px_#171717] ${
+              activeTab === idx ? 'ring-2 ring-[#F28C28]' : ''
+            }`}
+            onClick={() => setActiveTab(idx)}
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 bg-[#FFF8EE] rounded-lg border-2 border-[#171717] shadow-[1.5px_1.5px_0px_#171717]">
+                  {p.icon}
                 </div>
+                <h3 className="font-black text-base text-[#171717] uppercase">
+                  {p.title}
+                </h3>
               </div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#171717]/80">
-                {isSelected ? 'Active View' : 'Click to inspect'}
+              <span className="text-[10px] font-mono font-bold text-[#525252] bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+                A11Y PILLAR
               </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Detailed Inspection Panel for Selected Category */}
-      <div className="bg-white border-2 border-[#171717] rounded-2xl shadow-[5px_5px_0px_#171717] p-5 sm:p-7 mb-6">
-        <div className="flex items-center justify-between pb-3 border-b-2 border-[#171717] mb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-lg bg-[#FFF4E5] border-2 border-[#171717] shadow-[1.5px_1.5px_0px_#171717]">
-              {activeCategory.icon}
             </div>
-            <div>
-              <h2 className="text-base sm:text-lg font-black text-[#171717] uppercase">
-                {activeCategory.title} Disabilities & Interaction
-              </h2>
-              <p className="text-xs text-[#525252]">How assistive tools interface with your frontend code</p>
+
+            <div className="space-y-2 text-xs">
+              <div>
+                <span className="text-[10px] font-mono font-bold text-[#525252] uppercase block">Navigation:</span>
+                <p className="text-[#171717] font-semibold">{p.tech}</p>
+              </div>
+
+              <div className="p-2 rounded bg-[#FFF4E5] border border-[#171717]/30">
+                <span className="text-[10px] font-mono font-bold text-[#B91C1C] uppercase block mb-0.5">⚠️ The AI Pitfall:</span>
+                <p className="text-[#171717] text-[11px] font-medium leading-snug">{p.trap}</p>
+              </div>
             </div>
           </div>
-          <span className="hidden sm:inline-block text-[11px] font-mono font-bold px-2.5 py-1 bg-[#171717] text-white rounded">
-            WCAG 2.1 PRINCIPLE
-          </span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-          <div className="p-4 rounded-xl bg-[#FFF8EE] border-2 border-[#171717]">
-            <span className="text-[10px] font-mono font-black uppercase text-[#F28C28] block mb-1">
-              Assistive Technologies
-            </span>
-            <p className="text-[#171717] font-medium leading-relaxed">
-              {activeCategory.assistiveTech}
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#FEF2F2] border-2 border-[#171717]">
-            <span className="text-[10px] font-mono font-black uppercase text-[#B91C1C] block mb-1">
-              Common Web Barriers
-            </span>
-            <p className="text-[#171717] font-medium leading-relaxed">
-              {activeCategory.barriers}
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl bg-[#FFF4E5] border-2 border-[#171717]">
-            <span className="text-[10px] font-mono font-black uppercase text-[#171717] block mb-1">
-              AI Code Vulnerability
-            </span>
-            <p className="text-[#171717] font-medium leading-relaxed">
-              {activeCategory.aiRisk}
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* The Disability Spectrum Banner */}
-      <div className="bg-[#FFF8EE] border-2 border-[#171717] rounded-xl p-4 sm:p-5 shadow-[3px_3px_0px_#171717]">
-        <div className="flex items-center gap-2 mb-2">
-          <Sun className="w-4 h-4 text-[#F28C28]" />
-          <h3 className="text-xs font-black uppercase tracking-wider text-[#171717]">
-            The Persona Spectrum: Accessibility Benefits Everyone
-          </h3>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-          <div className="p-3 bg-white rounded-lg border border-[#171717]">
-            <strong className="block text-[#171717] font-black text-xs mb-0.5">1. Permanent</strong>
-            <p className="text-[#525252] text-[11px] leading-relaxed">
-              Deafness, low vision, paralysis, or neurological conditions. Assistive technologies are essential daily tools.
-            </p>
+      {/* The Persona Spectrum: Minimalist Banner */}
+      <div className="bg-[#FFF8EE] border-2 border-[#171717] rounded-xl p-4 shadow-[3px_3px_0px_#171717]">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#F28C28] shrink-0" />
+            <strong className="text-xs font-black uppercase text-[#171717]">
+              The Persona Spectrum:
+            </strong>
           </div>
 
-          <div className="p-3 bg-white rounded-lg border border-[#171717]">
-            <strong className="block text-[#171717] font-black text-xs mb-0.5">2. Temporary</strong>
-            <p className="text-[#525252] text-[11px] leading-relaxed">
-              A broken dominant arm, eye dilation surgery, or ear infection. Relies on keyboard navigation and high contrast.
-            </p>
-          </div>
-
-          <div className="p-3 bg-white rounded-lg border border-[#171717]">
-            <strong className="block text-[#171717] font-black text-xs mb-0.5">3. Situational</strong>
-            <p className="text-[#525252] text-[11px] leading-relaxed">
-              Holding a child with one hand, severe sunlight glare on a laptop screen, or working in a loud café without earbuds.
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-1">
+            <span className="bg-white px-2.5 py-1 rounded border border-[#171717] text-center font-bold text-[11px] text-[#171717]">
+              1. Permanent <span className="font-normal text-slate-500">(Low Vision)</span>
+            </span>
+            <span className="bg-white px-2.5 py-1 rounded border border-[#171717] text-center font-bold text-[11px] text-[#171717]">
+              2. Temporary <span className="font-normal text-slate-500">(Broken Arm)</span>
+            </span>
+            <span className="bg-white px-2.5 py-1 rounded border border-[#171717] text-center font-bold text-[11px] text-[#171717]">
+              3. Situational <span className="font-normal text-slate-500">(Sunlight Glare)</span>
+            </span>
           </div>
         </div>
       </div>
