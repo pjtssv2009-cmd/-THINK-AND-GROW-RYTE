@@ -9,8 +9,14 @@ import {
   Minimize2, 
   FileText, 
   ChevronDown,
-  Layers
+  Layers,
+  Download,
+  Check
 } from 'lucide-react';
+import { 
+  downloadSlideScript, 
+  downloadMasterScript 
+} from '../constants/presentationScripts';
 
 export const Header: React.FC = () => {
   const {
@@ -27,6 +33,22 @@ export const Header: React.FC = () => {
   } = usePresentation();
 
   const [showNavMenu, setShowNavMenu] = useState(false);
+  const [showScriptMenu, setShowScriptMenu] = useState(false);
+  const [downloadNotice, setDownloadNotice] = useState<string | null>(null);
+
+  const handleDownloadSlide = () => {
+    downloadSlideScript(currentSlide.slideNumber);
+    setDownloadNotice(`Slide ${currentSlide.slideNumber} downloaded!`);
+    setShowScriptMenu(false);
+    setTimeout(() => setDownloadNotice(null), 3000);
+  };
+
+  const handleDownloadMaster = () => {
+    downloadMasterScript();
+    setDownloadNotice('Master script downloaded!');
+    setShowScriptMenu(false);
+    setTimeout(() => setDownloadNotice(null), 3000);
+  };
 
   return (
     <header 
@@ -75,14 +97,17 @@ export const Header: React.FC = () => {
           </span>
         </div>
 
-        {/* Right: Slide Menu, Presenter Notes, Sound, Fullscreen */}
+        {/* Right: Slide Menu, Download Script, Presenter Notes, Sound, Fullscreen */}
         <div className="flex items-center gap-2 shrink-0">
           
           {/* Quick Slide Navigation Dropdown */}
           <div className="relative">
             <button
               type="button"
-              onClick={() => setShowNavMenu(prev => !prev)}
+              onClick={() => {
+                setShowNavMenu(prev => !prev);
+                setShowScriptMenu(false);
+              }}
               className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#171717] bg-white hover:bg-[#FFF4E5] rounded-lg border-2 border-[#171717] shadow-[2px_2px_0px_#171717] active:translate-x-[1px] active:translate-y-[1px] active:shadow-[1px_1px_0px_#171717] transition-all focus-visible:outline-3 focus-visible:outline-[#F28C28]"
               aria-expanded={showNavMenu}
               aria-haspopup="true"
@@ -132,6 +157,96 @@ export const Header: React.FC = () => {
             )}
           </div>
 
+          {/* Download Script Dropdown Button */}
+          <div className="relative">
+            <button
+              type="button"
+              onClick={() => {
+                setShowScriptMenu(prev => !prev);
+                setShowNavMenu(false);
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#171717] bg-white hover:bg-[#FFF4E5] rounded-lg border-2 border-[#171717] shadow-[2px_2px_0px_#171717] active:translate-x-[1px] active:translate-y-[1px] transition-all focus-visible:outline-3 focus-visible:outline-[#F28C28]"
+              aria-expanded={showScriptMenu}
+              aria-haspopup="true"
+              aria-label="Download presentation script"
+              title="Download presentation script"
+            >
+              <Download className="w-3.5 h-3.5 text-[#F28C28]" />
+              <span className="hidden md:inline">Download Script</span>
+              <ChevronDown className={`w-3.5 h-3.5 text-[#171717] transition-transform ${showScriptMenu ? 'rotate-180' : ''}`} />
+            </button>
+
+            {showScriptMenu && (
+              <div 
+                className="absolute right-0 mt-2 w-80 bg-white rounded-lg border-2 border-[#171717] shadow-[5px_5px_0px_#171717] p-2 z-50 animate-slide-in space-y-1.5"
+                role="menu"
+                aria-orientation="vertical"
+              >
+                <div className="px-2 py-1 text-[10px] font-mono font-black uppercase tracking-wider text-[#525252] border-b border-[#171717]/20 flex items-center justify-between">
+                  <span>Export Presentation Script</span>
+                  <span className="text-[#F28C28] font-bold">.MD</span>
+                </div>
+
+                {/* Option 1: Current Slide Script */}
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={handleDownloadSlide}
+                  className="w-full text-left p-2.5 rounded-md hover:bg-[#FFF4E5] border border-transparent hover:border-[#171717] transition-all flex items-start gap-2.5 group"
+                >
+                  <div className="p-1.5 bg-[#FFF4E5] rounded border border-[#171717] shrink-0 mt-0.5 group-hover:bg-[#F28C28]">
+                    <FileText className="w-3.5 h-3.5 text-[#171717]" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-[#171717] flex items-center gap-1.5">
+                      <span>Current Slide Script</span>
+                      <span className="text-[10px] font-mono px-1 py-0.2 bg-slate-100 rounded text-slate-600">
+                        Slide {currentSlide.slideNumber}
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-[#525252] font-medium leading-snug mt-0.5">
+                      Spoken script, visual cues & talking points for "{currentSlide.title}"
+                    </p>
+                  </div>
+                </button>
+
+                {/* Option 2: Full Master Script */}
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={handleDownloadMaster}
+                  className="w-full text-left p-2.5 rounded-md bg-[#FFF8EE] hover:bg-[#F28C28]/20 border border-[#171717] transition-all flex items-start gap-2.5 group"
+                >
+                  <div className="p-1.5 bg-[#171717] rounded border border-[#171717] shrink-0 mt-0.5">
+                    <Download className="w-3.5 h-3.5 text-[#F28C28]" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-black text-[#171717] flex items-center gap-1.5">
+                      <span>Full Master Script (All 10 Slides)</span>
+                    </div>
+                    <p className="text-[11px] text-[#525252] font-medium leading-snug mt-0.5">
+                      Complete word-for-word presentation, timekeeper guide & Q&A defense
+                    </p>
+                  </div>
+                </button>
+
+                {/* Option 3: View in Presenter Notes */}
+                <button
+                  type="button"
+                  role="menuitem"
+                  onClick={() => {
+                    if (!isPresenterNotesOpen) togglePresenterNotes();
+                    setShowScriptMenu(false);
+                  }}
+                  className="w-full text-left px-2.5 py-1.5 rounded text-[11px] font-bold text-[#525252] hover:text-[#171717] hover:bg-slate-50 flex items-center justify-between"
+                >
+                  <span>Or read live on screen</span>
+                  <span className="text-[10px] font-mono px-1 bg-slate-200 rounded">Press P</span>
+                </button>
+              </div>
+            )}
+          </div>
+
           {/* Presenter Notes Button */}
           <button
             type="button"
@@ -141,8 +256,8 @@ export const Header: React.FC = () => {
                 ? 'bg-[#F28C28] text-[#171717] shadow-[1px_1px_0px_#171717] translate-x-[1px] translate-y-[1px]' 
                 : 'bg-white text-[#171717] hover:bg-[#FFF4E5] shadow-[2px_2px_0px_#171717] active:translate-x-[1px] active:translate-y-[1px]'
             }`}
-            title="Toggle Presenter Notes (Press P)"
-            aria-label="Toggle Presenter Notes"
+            title="Toggle Presenter Notes & Script (Press P)"
+            aria-label="Toggle Presenter Notes & Script"
             aria-pressed={isPresenterNotesOpen}
           >
             <FileText className="w-4 h-4" />
@@ -180,6 +295,18 @@ export const Header: React.FC = () => {
 
         </div>
       </div>
+
+      {/* Floating Download Confirmation Toast */}
+      {downloadNotice && (
+        <div 
+          role="status"
+          aria-live="polite"
+          className="fixed top-16 right-6 z-50 bg-[#171717] text-white px-4 py-2.5 rounded-lg border-2 border-[#F28C28] shadow-[4px_4px_0px_#F28C28] flex items-center gap-2 text-xs font-black animate-slide-in"
+        >
+          <Check className="w-4 h-4 text-emerald-400" />
+          <span>{downloadNotice}</span>
+        </div>
+      )}
     </header>
   );
 };
