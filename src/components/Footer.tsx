@@ -18,11 +18,11 @@ export const Footer: React.FC = () => {
   return (
     <footer 
       role="contentinfo" 
-      className="sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-[#E4E7EC] px-4 lg:px-8 py-3 shadow-subtle"
+      className="sticky bottom-0 z-30 bg-white border-t-2 border-[#171717] px-4 lg:px-8 py-2.5 shadow-[0_-2px_0px_#171717]"
     >
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
         
-        {/* Left: Minimal slide progress dots & stage name */}
+        {/* Left: Neo-brutalist slide progress stepper */}
         <div className="flex items-center gap-1.5 overflow-x-auto max-w-full py-0.5">
           {SLIDES.map((slide, idx) => {
             const isActive = idx === currentSlideIndex;
@@ -32,20 +32,20 @@ export const Footer: React.FC = () => {
                 key={slide.id}
                 type="button"
                 onClick={() => goToSlide(idx)}
-                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold transition-all shrink-0 focus-visible:ring-2 focus-visible:ring-[#5B5CE2] ${
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold transition-all shrink-0 border-2 border-[#171717] focus-visible:outline-3 focus-visible:outline-[#F28C28] ${
                   isActive
-                    ? 'bg-[#5B5CE2] text-white shadow-xs font-bold'
+                    ? 'bg-[#F28C28] text-[#171717] shadow-[2px_2px_0px_#171717] font-black'
                     : isPassed
-                    ? 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                    : 'text-slate-400 hover:bg-slate-50'
+                    ? 'bg-[#FFF4E5] text-[#171717] hover:bg-[#FFE8CC]'
+                    : 'bg-white text-slate-500 hover:bg-slate-50'
                 }`}
                 aria-label={`Go to slide ${slide.slideNumber}: ${slide.title}`}
                 aria-current={isActive ? 'step' : undefined}
               >
-                <span className="font-mono text-[11px]">
+                <span className="font-mono text-[11px] font-bold">
                   {slide.slideNumber}
                 </span>
-                <span className="hidden xl:inline text-[11px] truncate max-w-[120px]">
+                <span className="hidden xl:inline text-[11px] truncate max-w-[110px]">
                   {slide.title}
                 </span>
               </button>
@@ -56,9 +56,9 @@ export const Footer: React.FC = () => {
         {/* Right: Keyboard navigation helper and Next/Previous controls */}
         <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
           
-          <div className="hidden lg:flex items-center gap-1.5 text-xs text-slate-400 font-medium select-none">
-            <Keyboard className="w-3.5 h-3.5 text-slate-400" />
-            <span>Navigate with <kbd className="px-1.5 py-0.5 text-[10px] bg-slate-100 border border-slate-200 rounded font-mono text-slate-600 font-semibold">←</kbd> and <kbd className="px-1.5 py-0.5 text-[10px] bg-slate-100 border border-slate-200 rounded font-mono text-slate-600 font-semibold">→</kbd></span>
+          <div className="hidden lg:flex items-center gap-1.5 text-xs text-[#525252] font-semibold select-none">
+            <Keyboard className="w-3.5 h-3.5 text-[#171717]" />
+            <span>Navigate with <kbd className="px-1.5 py-0.5 text-[10px] bg-white border-2 border-[#171717] rounded shadow-[1px_1px_0px_#171717] font-mono text-[#171717] font-black">←</kbd> and <kbd className="px-1.5 py-0.5 text-[10px] bg-white border-2 border-[#171717] rounded shadow-[1px_1px_0px_#171717] font-mono text-[#171717] font-black">→</kbd></span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -66,10 +66,10 @@ export const Footer: React.FC = () => {
               type="button"
               onClick={goToPrevSlide}
               disabled={isFirstSlide}
-              className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border transition-all focus-visible:ring-2 focus-visible:ring-[#5B5CE2] ${
+              className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-black border-2 transition-all focus-visible:outline-3 focus-visible:outline-[#F28C28] ${
                 isFirstSlide
-                  ? 'border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50'
-                  : 'border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-slate-300 active:scale-[0.98]'
+                  ? 'border-slate-300 text-slate-400 cursor-not-allowed bg-slate-100'
+                  : 'border-[#171717] text-[#171717] bg-white hover:bg-[#FFF4E5] shadow-[2px_2px_0px_#171717] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none'
               }`}
               aria-label="Previous slide"
             >
@@ -81,10 +81,10 @@ export const Footer: React.FC = () => {
               type="button"
               onClick={goToNextSlide}
               disabled={isLastSlide}
-              className={`flex items-center gap-1.5 px-5 py-2 rounded-xl text-xs font-bold transition-all focus-visible:ring-2 focus-visible:ring-[#5B5CE2] ${
+              className={`flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-xs font-black border-2 transition-all focus-visible:outline-3 focus-visible:outline-[#F28C28] ${
                 isLastSlide
-                  ? 'border border-slate-200 text-slate-300 cursor-not-allowed bg-slate-50'
-                  : 'bg-[#5B5CE2] hover:bg-[#4C4DD0] text-white shadow-xs hover:shadow active:scale-[0.98]'
+                  ? 'border-slate-300 text-slate-400 cursor-not-allowed bg-slate-100'
+                  : 'border-[#171717] bg-[#F28C28] hover:bg-[#DF7A1B] text-[#171717] shadow-[3px_3px_0px_#171717] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#171717]'
               }`}
               aria-label={isLastSlide ? 'End of Presentation' : 'Next slide'}
             >

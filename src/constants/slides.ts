@@ -5,159 +5,164 @@ export const SLIDES: SlideMeta[] = [
     id: 'slide-01',
     index: 0,
     slideNumber: '01',
-    title: 'Cinematic Opening',
-    stageName: 'Mission Brief',
-    durationMin: 1,
+    title: 'Title & Introduction',
+    stageName: 'Introduction',
+    durationMin: 1.0,
     headline: 'AI CAN BUILD IT. BUT CAN EVERYONE USE IT?',
-    description: 'The hidden accessibility bugs in AI-generated interfaces.',
+    description: 'Understanding accessibility in AI-generated interfaces.',
     talkingPoints: [
-      'Welcome to Think and Grow RYTE. Today we are exploring modern AI and engineering craftsmanship.',
-      'AI tools like Claude, Copilot, and Cursor allow any engineer to generate complete interfaces in seconds.',
-      'The code compiles, runs fast, and looks visually stunning. But is it genuinely usable by everyone?',
-      'Over the next 15 minutes, we will unpack the hidden accessibility flaws in AI code and learn how to fix them.'
+      'Welcome to Think and Grow RYTE. Today we examine the intersection of generative AI and frontend craftsmanship.',
+      'AI vibe-coding tools can scaffold responsive, visually stunning layouts in seconds.',
+      'However, AI models frequently output visual-only wrappers that completely exclude assistive technology users.',
+      'Over the next 15 minutes, we will explore core web accessibility principles and practical ways to make AI code accessible.'
     ]
   },
   {
     id: 'slide-02',
     index: 1,
     slideNumber: '02',
-    title: 'The Reality Check',
-    stageName: 'Analysis',
+    title: 'What Is Accessibility?',
+    stageName: 'Foundations',
     durationMin: 1.5,
-    headline: "FUNCTIONAL DOESN'T MEAN USABLE.",
-    description: 'Comparing visual completion against real-world accessibility failures.',
+    headline: 'WHAT IS WEB ACCESSIBILITY?',
+    description: 'Enabling people with visual, auditory, motor, and cognitive needs to perceive and operate digital products.',
     talkingPoints: [
-      'Here is a realistic side-by-side comparison of an AI-prompted SaaS interface.',
-      'On the left: It looks correct and functions seamlessly under a standard trackpad or mouse.',
-      'On the right: What happens when tested with assistive technology or keyboard-only navigation.',
-      'Over 96% of the top 1 million homepages fail basic WCAG standards — and AI is trained on those exact pages.'
+      'Accessibility means ensuring digital products can be used by everyone, regardless of ability or operating context.',
+      'Visual: Screen readers (VoiceOver, NVDA), screen magnifiers, high-contrast modes for low vision and color blindness.',
+      'Motor: Keyboard-only users, switch devices, mouth wands, eye trackers who cannot operate a fine pointing device.',
+      'Auditory & Cognitive: Captions, visual status alerts, clear structure, predictable interactions, and plain language.',
+      'Situational & Temporary: Accessibility benefits everyone — from someone with a broken wrist to an engineer working in bright outdoor sunlight.'
     ]
   },
   {
     id: 'slide-03',
     index: 2,
     slideNumber: '03',
-    title: 'Enter The Bug Lab',
-    stageName: 'Inspection',
-    durationMin: 2,
-    headline: 'FIVE BUGS. ONE INTERFACE.',
-    description: 'Anatomy of an AI-generated contact form with five critical failure points.',
+    title: 'Why It Matters',
+    stageName: 'Impact & Value',
+    durationMin: 1.5,
+    headline: 'WHY ACCESSIBILITY MATTERS',
+    description: 'Inclusive user experiences, higher quality software, legal compliance, and zero artificial barriers.',
     talkingPoints: [
-      'We asked a standard LLM to generate a minimal modern contact form.',
-      'It contains five distinct traps: contrast, missing labels, vanished focus, vague errors, and color-only states.',
-      'Notice how each flaw is virtually invisible to a visual reviewer during a quick code review.',
-      'Click on any marker to reveal the underlying failure mode.'
+      'Inclusive Experiences: Technology should open doors, not build digital barriers for millions of users worldwide.',
+      'Usability for Everyone: Semantic, accessible code produces cleaner DOM trees, faster performance, and better UX for mouse, touch, and keyboard alike.',
+      'Standards & Compliance: International standards such as WCAG 2.1 / 2.2 AA, ADA Title III, and Section 508 define strict expectations.',
+      'Cost of Rework: Catching accessibility issues during initial generation takes seconds; retrofitting production apps costs weeks.'
     ]
   },
   {
     id: 'slide-04',
     index: 3,
     slideNumber: '04',
-    title: 'Bug 01: The Invisible Label',
-    stageName: 'Deep Dive',
-    durationMin: 1.5,
-    headline: "THE FIELD EXISTS. THE MEANING DOESN'T.",
-    description: 'Why visual labels without programmatic association leave screen reader users in the dark.',
+    title: 'Five Common Problems',
+    stageName: 'Failure Modes',
+    durationMin: 2.0,
+    headline: 'FIVE COMMON ACCESSIBILITY PROBLEMS',
+    description: 'The five most recurring anti-patterns generated by AI vibe coding in modern web applications.',
     talkingPoints: [
-      'AI models love styling <span>Full Name</span> instead of proper semantic <label for="name">.',
-      'A sighted user sees the text right above the box.',
-      'A blind engineer using VoiceOver hears only: "Edit text, blank" — with zero indication of what to type.',
-      'The fix is simple: always bind your label with htmlFor and matching input id.'
+      '1. Insufficient Color Contrast: Aesthetic pale grays that wash out and fail WCAG luminance ratios.',
+      '2. Missing Form Labels: Visual <span> text that leaves screen readers announcing "Edit text, blank".',
+      '3. Poor Keyboard Navigation: outline:none and clickable <div> buttons that trap or skip keyboard users.',
+      '4. Inaccessible Error Messages: Errors that appear visually but are never wired to aria-describedby or role="alert".',
+      '5. Information Communicated Through Color Alone: Red borders that convey nothing to users with red-green color blindness.'
     ]
   },
   {
     id: 'slide-05',
     index: 4,
     slideNumber: '05',
-    title: 'Bug 02: The Keyboard Trap',
-    stageName: 'Deep Dive',
-    durationMin: 2,
-    headline: 'NO MOUSE. NOW WHAT?',
-    description: 'Tracing keyboard focus paths across native buttons vs clickable divs.',
+    title: 'Color Contrast',
+    stageName: 'Visual Standard',
+    durationMin: 1.5,
+    headline: 'COLOR CONTRAST: THE FIRST LINE OF DEFENSE',
+    description: 'Evaluating WCAG 2.1 AA luminance standards: 4.5:1 for body copy and 3.0:1 for large text and UI controls.',
     talkingPoints: [
-      'AI styling presets often add "outline: none" or generate <div onClick={...}> instead of native <button>.',
-      'Pressing Tab moves through the form until it hits the custom button — and disappears into a black hole.',
-      'Users with tremors, motor disabilities, or power keyboard users are completely blocked from submitting.',
-      'Let us trace the focus path together and observe where the indicator vanishes.'
+      'WCAG Level AA requires a 4.5:1 minimum contrast ratio for normal body text against its background.',
+      'Large text (18pt / 24px, or 14pt / 18.5px bold) and active UI controls require a minimum 3.0:1 ratio.',
+      'AI models love subtle pale text (#94A3B8 on #FFFFFF is 2.3:1) which fails dramatically in outdoor glare or on budget screens.',
+      'Switching to #171717 or #475569 restores 7.0:1+ contrast while maintaining high-end editorial aesthetics.'
     ]
   },
   {
     id: 'slide-06',
     index: 5,
     slideNumber: '06',
-    title: 'Bug 03: The Contrast Problem',
-    stageName: 'Deep Dive',
+    title: 'Semantic HTML & Labels',
+    stageName: 'Structure',
     durationMin: 1.5,
-    headline: 'CAN YOU ACTUALLY READ THIS?',
-    description: 'Evaluating color luminance ratios and the modern pale aesthetic trap.',
+    headline: 'SEMANTIC HTML & FORM LABELS',
+    description: 'Why programmatic label-to-input association and native HTML tags are essential for assistive technology.',
     talkingPoints: [
-      'Generative design favors subtle low-contrast gray text on white cards for a "sleek" look.',
-      'At 1.8:1 or 2.5:1, text washes out entirely in sunlight, on laptop glare, or for users with low vision.',
-      'WCAG AA requires 4.5:1 for body copy and 3:1 for large headlines and UI boundaries.',
-      'Notice how adjusting the token to 5.4:1 preserves the modern design without sacrificing legibility.'
+      'Assistive devices do not see pixels; they query the browser Accessibility Object Model (AOM).',
+      'A <span class="label"> is invisible to screen readers without an explicit <label for="id"> connection.',
+      'Using native <button> gives focusability, Enter/Space activation, and keyboard navigation automatically.',
+      'Replacing <div onClick> with native elements eliminates dozens of lines of redundant keyboard listener code.'
     ]
   },
   {
     id: 'slide-07',
     index: 6,
     slideNumber: '07',
-    title: 'The Detective Desk',
-    stageName: 'Audit Workspace',
-    durationMin: 2,
-    headline: 'FIND WHAT THE EYE MISSES.',
-    description: 'The critical difference between automated linters and human manual testing.',
+    title: 'Keyboard Accessibility',
+    stageName: 'Navigation',
+    durationMin: 1.5,
+    headline: 'KEYBOARD ACCESSIBILITY: NO MOUSE REQUIRED',
+    description: 'Ensuring logical Tab sequences, visible focus rings, and Enter/Space activation across all interactive elements.',
     talkingPoints: [
-      'Engineers often ask: "If my Lighthouse accessibility score is 95, are we good to ship?"',
-      'Automated audits (axe-core, Lighthouse) can only algorithmically test ~30-40% of WCAG criteria.',
-      'Automation cannot evaluate if the tab order makes logical sense or if error messages are comprehensible.',
-      'A holistic audit combines automated CI linting with 5 minutes of keyboard navigation testing.'
+      'Every action achievable with a mouse must be equally achievable with a keyboard alone.',
+      'Pressing Tab must advance through interactive controls in a logical reading order; Shift+Tab moves backward.',
+      'The single most damaging CSS line is "outline: none" or "* { outline: 0 }".',
+      'Use modern :focus-visible to provide a prominent 2px or 3px ring only when keyboard navigation is active.'
     ]
   },
   {
     id: 'slide-08',
     index: 7,
     slideNumber: '08',
-    title: 'The Repair Station',
-    stageName: 'Refactoring',
-    durationMin: 2,
-    headline: "LET'S FIX THE EXPERIENCE.",
-    description: 'Side-by-side code diffs demonstrating accessible HTML & CSS enhancements.',
+    title: 'Accessibility Testing',
+    stageName: 'Quality Suite',
+    durationMin: 1.5,
+    headline: 'ACCESSIBILITY TESTING: AUTOMATED VS. MANUAL',
+    description: 'Understanding the distinct roles of Lighthouse, axe DevTools, manual keyboard audits, and screen readers.',
     talkingPoints: [
-      'Here is the complete refactoring in action.',
-      'We apply three concrete changes: label bindings, high-contrast :focus-visible rings, and multi-modal error cues.',
-      'Notice that the accessible interface looks every bit as premium as the original AI draft.',
-      'Accessibility is not a constraint on aesthetics — it is a commitment to quality.'
+      'Chrome Lighthouse & axe DevTools are vital CI gates for catching contrast, missing IDs, and syntax errors.',
+      'Crucial Reality: Automated tools only catch 30% to 40% of real-world accessibility defects.',
+      'Manual Keyboard Testing: Disconnect the mouse for 60 seconds. Can you tab through the entire modal? Can you hit Escape to close it?',
+      'Screen-Reader Verification: Test critical checkout or onboarding flows with VoiceOver (macOS) or NVDA (Windows).'
     ]
   },
   {
     id: 'slide-09',
     index: 8,
     slideNumber: '09',
-    title: 'The Proof',
-    stageName: 'Verification',
-    durationMin: 1,
-    headline: 'BUILD. TEST. VERIFY.',
-    description: 'A 3-stage delivery loop for AI-accelerated engineering teams.',
+    title: 'Live Demo: Audit & Fix',
+    stageName: 'Hands-on Demo',
+    durationMin: 2.0,
+    headline: 'LIVE DEMO: AUDIT AND FIX',
+    description: 'A 4-step progressive workshop on a realistic contact form: Identify, Inspect HTML, Apply Fixes, and Retest.',
     talkingPoints: [
-      'How do we operationalize this in our daily sprint workflow?',
-      'Stage 1: Generate fast with AI prompts.',
-      'Stage 2: Run automated linters and execute a 60-second keyboard audit.',
-      'Stage 3: Fix defects, verify in browser accessibility tree, and ship with confidence.'
+      'Step 1: Identify — Notice the unlabeled input, the 1.8:1 text, the vanished focus ring, and the color-only error.',
+      'Step 2: Inspect — View the raw HTML anti-patterns generated by default AI prompts.',
+      'Step 3: Correct — Bind htmlFor, restore :focus-visible, and attach aria-describedby with helper text.',
+      'Step 4: Retest — Verify keyboard tab traversal and multi-modal error recovery in real-time.'
     ]
   },
   {
     id: 'slide-10',
     index: 9,
     slideNumber: '10',
-    title: 'The Takeaway',
-    stageName: 'Wrap-Up',
-    durationMin: 1.5,
-    headline: "SHIP FEATURES. DON'T SHIP BARRIERS.",
-    description: 'Five actionable daily principles and session wrap-up.',
+    title: 'Checklist & Conclusion',
+    stageName: 'Takeaways',
+    durationMin: 1.0,
+    headline: 'PRACTICAL CHECKLIST & CONCLUSION',
+    description: 'A reusable 5-point engineering checklist for reviewing AI-generated interfaces before merging pull requests.',
     talkingPoints: [
-      'Take away this 5-point checklist for your next pull request.',
-      '1. Test with a keyboard. 2. Verify form labels. 3. Check contrast math. 4. Multi-modal errors. 5. Combine auto + manual.',
-      'Thank you for joining Think and Grow RYTE. Let us build fast, test thoughtfully, and design for everyone!'
+      '1. Disconnect the Mouse: Tab through the entire flow. Is focus always visible and logical?',
+      '2. Check Form Labels: Does every input have a programmatic <label for="id">?',
+      '3. Verify Contrast: Do body text and UI controls meet 4.5:1 and 3.0:1 minimums?',
+      '4. Test Error Handling: Are error messages visible, textual, and paired with role="alert"?',
+      '5. Combine Automation with 60s Manual Check: Run axe-core in CI, and manually tab before approval.',
+      'Closing motto: "Build fast. Test thoughtfully. Design for everyone."'
     ]
   }
 ];

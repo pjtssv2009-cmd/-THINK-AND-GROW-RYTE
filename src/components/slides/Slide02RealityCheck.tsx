@@ -1,216 +1,172 @@
 import React, { useState } from 'react';
-import { 
-  CheckCircle2, 
-  XCircle, 
-  MousePointer, 
-  AlertTriangle
-} from 'lucide-react';
+import { Eye, MousePointer, Volume2, Brain, Sun } from 'lucide-react';
 
 export const Slide02RealityCheck: React.FC = () => {
-  const [activeHighlight, setActiveHighlight] = useState<number | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<'visual' | 'motor' | 'auditory' | 'cognitive'>('visual');
 
-  const observations = [
+  const categories = [
     {
-      id: 1,
-      title: 'Looks Correct',
-      tag: 'Visual Impression',
-      description: 'The AI model generated polished Tailwind components with sleek borders, modern typography, and clean layout balance.',
-      color: 'border-emerald-200 bg-emerald-50/50 text-emerald-900',
-      icon: <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+      id: 'visual' as const,
+      title: 'Visual',
+      icon: <Eye className="w-5 h-5 text-[#F28C28]" />,
+      assistiveTech: 'Screen readers (NVDA, VoiceOver, JAWS), Screen magnifiers, High-contrast OS themes.',
+      barriers: 'Missing programmatic labels, images without alt text, low-contrast text, color-only state indicators.',
+      aiRisk: 'AI scaffolding defaults to visual-only <span> tags and low-contrast pale gray text.'
     },
     {
-      id: 2,
-      title: 'Works with a Mouse',
-      tag: 'Developer Bias',
-      description: 'A developer clicks with a trackpad, verifies that onSubmit triggers, and closes the pull request assuming it is complete.',
-      color: 'border-blue-200 bg-blue-50/50 text-blue-900',
-      icon: <MousePointer className="w-4 h-4 text-[#3B82F6]" />
+      id: 'motor' as const,
+      title: 'Motor & Mobility',
+      icon: <MousePointer className="w-5 h-5 text-[#15803D]" />,
+      assistiveTech: 'Keyboard-only, Sip-and-puff switches, Head pointers, Eye-tracking cameras, Voice dictation.',
+      barriers: 'Interactive elements without keyboard focus rings, clickable <div> elements, trap loops.',
+      aiRisk: 'AI frequently inserts "outline: none" or fails to bind Enter/Space keyboard handlers on custom buttons.'
     },
     {
-      id: 3,
-      title: 'Fails in Real-World Usage',
-      tag: 'Accessibility Barrier',
-      description: 'Zero keyboard focus rings, unassociated input labels, and 1.8:1 faint text block screen readers and assistive devices.',
-      color: 'border-red-200 bg-red-50/50 text-red-900',
-      icon: <XCircle className="w-4 h-4 text-red-600" />
+      id: 'auditory' as const,
+      title: 'Auditory',
+      icon: <Volume2 className="w-5 h-5 text-[#D97706]" />,
+      assistiveTech: 'Synchronized captions, Transcripts, Visual flash alerts, Haptic notifications.',
+      barriers: 'Audio-only notifications, video without captions, audio CAPTCHAs without visual fallbacks.',
+      aiRisk: 'Audio cues generated without visual status messages (role="status" or visual badges).'
+    },
+    {
+      id: 'cognitive' as const,
+      title: 'Cognitive',
+      icon: <Brain className="w-5 h-5 text-[#B91C1C]" />,
+      assistiveTech: 'Reading modes, Spell checkers, Text-to-speech, Focus highlighting, Consistent nav cues.',
+      barriers: 'Flashing animations, disorienting transitions, strict unforgiving timers, cryptic validation errors.',
+      aiRisk: 'Ambiguous error states ("Invalid input") without specific instructions on how to correct the error.'
     }
   ];
 
+  const activeCategory = categories.find(c => c.id === selectedCategory) || categories[0];
+
   return (
-    <div className="w-full max-w-6xl mx-auto py-4 sm:py-6 px-4 flex flex-col animate-slide-in">
+    <div className="w-full max-w-5xl mx-auto py-4 sm:py-6 px-4 flex flex-col animate-slide-in">
       
       {/* Slide Header */}
       <div className="mb-6 text-center max-w-3xl mx-auto">
-        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#5B5CE2] bg-[#EEF0FD] px-3 py-1 rounded-full border border-[#5B5CE2]/20">
-          THE REALITY CHECK • ANALYSIS
+        <span className="text-xs font-mono font-black uppercase tracking-wider text-[#171717] bg-[#FFF4E5] px-3.5 py-1 rounded-md border-2 border-[#171717] shadow-[2px_2px_0px_#171717]">
+          FOUNDATIONS • BEYOND THE MOUSE
         </span>
-        <h1 className="text-2xl sm:text-4xl font-black text-[#172033] tracking-tight mt-2.5 mb-2 uppercase">
-          FUNCTIONAL DOESN'T MEAN USABLE.
+        <h1 className="text-2xl sm:text-4xl font-black text-[#171717] tracking-tight mt-3 mb-2 uppercase">
+          WHAT IS WEB ACCESSIBILITY?
         </h1>
-        <p className="text-xs sm:text-sm text-[#667085] leading-relaxed">
-          AI optimizes for rapid visual delivery. But what passes a trackpad test often completely fails human assistive criteria.
+        <p className="text-xs sm:text-sm font-semibold text-[#525252]">
+          Web accessibility (a11y) ensures that everyone—regardless of hardware, sensory ability, motor control, or context—can perceive, understand, navigate, and interact with the web.
         </p>
       </div>
 
-      {/* Large Split-Screen Comparison */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        
-        {/* Left: What the Developer Sees (Looks Impressive) */}
-        <div className="bg-white rounded-3xl border border-[#E4E7EC] shadow-card p-6 relative overflow-hidden">
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-5">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
-                Left: AI-Generated Output
-              </span>
-            </div>
-            <span className="text-[10px] font-mono bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full border border-emerald-200 font-semibold">
-              Compiles & Looks Modern
-            </span>
-          </div>
-
-          {/* Realistic Form Preview */}
-          <div className="space-y-4">
-            <div>
-              <span className="text-xs font-medium text-slate-700 block mb-1">
-                Project Name
-              </span>
-              <div className="px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-800 shadow-2xs">
-                Accessibility Audit 2026
-              </div>
-            </div>
-
-            <div>
-              <span className="text-xs font-medium text-slate-700 block mb-1">
-                Notification Channel
-              </span>
-              <div className="px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-[#CBD5E1] shadow-2xs">
-                team@company.internal (faint preview)
-              </div>
-            </div>
-
-            <div className="pt-2 flex items-center justify-between">
-              <div className="px-5 py-2.5 rounded-xl bg-slate-900 text-white text-xs font-semibold shadow-xs">
-                Deploy Feature
-              </div>
-              <span className="text-[10px] text-slate-400 font-mono">
-                Prompt: "Clean minimal card"
-              </span>
-            </div>
-          </div>
-
-          {/* Annotation note */}
-          <div className="mt-6 pt-3 border-t border-slate-100 text-[11px] text-slate-500 flex items-center gap-2">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-            <span>Passed 100% of syntactic linters and visual mock reviews.</span>
-          </div>
-        </div>
-
-        {/* Right: What the Accessibility Inspection Reveals */}
-        <div className="bg-white rounded-3xl border-2 border-red-200 shadow-card p-6 relative overflow-hidden">
-          <div className="flex items-center justify-between pb-3 border-b border-red-100 mb-5">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-red-700">
-                Right: Accessibility Breakdown
-              </span>
-            </div>
-            <span className="text-[10px] font-mono bg-red-50 text-red-700 px-2.5 py-0.5 rounded-full border border-red-200 font-semibold">
-              3 Silent Failures
-            </span>
-          </div>
-
-          {/* Form Annotated with Callouts */}
-          <div className="space-y-4">
-            
-            {/* Callout 1 */}
-            <div 
-              onMouseEnter={() => setActiveHighlight(1)}
-              onMouseLeave={() => setActiveHighlight(null)}
-              className={`p-2.5 rounded-xl border transition-all ${
-                activeHighlight === 1 ? 'border-red-500 bg-red-50/70' : 'border-red-200 bg-red-50/30'
-              }`}
+      {/* 4 Interaction Models Tabs */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+        {categories.map((cat) => {
+          const isSelected = selectedCategory === cat.id;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`p-3.5 rounded-xl border-2 border-[#171717] text-left transition-all flex flex-col justify-between ${
+                isSelected
+                  ? 'bg-[#F28C28] text-[#171717] shadow-[3px_3px_0px_#171717] -translate-x-0.5 -translate-y-0.5'
+                  : 'bg-white hover:bg-[#FFF4E5] text-[#171717] shadow-[2px_2px_0px_#171717]'
+              } focus-visible:outline-3 focus-visible:outline-[#F28C28]`}
+              aria-pressed={isSelected}
             >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-slate-700">Project Name</span>
-                <span className="text-[10px] font-bold text-red-600 bg-white px-2 py-0.5 rounded border border-red-300">
-                  Callout #1: Missing &lt;label for&gt;
-                </span>
+              <div className="flex items-center justify-between w-full mb-2">
+                <span className="font-black text-sm uppercase">{cat.title}</span>
+                <div className="p-1.5 rounded bg-white border border-[#171717]">
+                  {cat.icon}
+                </div>
               </div>
-              <p className="text-[11px] text-red-800 leading-tight">
-                Screen readers announce: <em>"Edit text, blank"</em>. The field's purpose is completely lost.
-              </p>
-            </div>
-
-            {/* Callout 2 */}
-            <div 
-              onMouseEnter={() => setActiveHighlight(2)}
-              onMouseLeave={() => setActiveHighlight(null)}
-              className={`p-2.5 rounded-xl border transition-all ${
-                activeHighlight === 2 ? 'border-amber-500 bg-amber-50/70' : 'border-amber-200 bg-amber-50/30'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-slate-700">Notification Channel</span>
-                <span className="text-[10px] font-bold text-amber-700 bg-white px-2 py-0.5 rounded border border-amber-300">
-                  Callout #2: 1.8:1 Contrast
-                </span>
-              </div>
-              <p className="text-[11px] text-amber-900 leading-tight">
-                Fails WCAG 4.5:1 minimum contrast. Washes out under normal office or sunlight glare.
-              </p>
-            </div>
-
-            {/* Callout 3 */}
-            <div 
-              onMouseEnter={() => setActiveHighlight(3)}
-              onMouseLeave={() => setActiveHighlight(null)}
-              className={`p-2.5 rounded-xl border transition-all ${
-                activeHighlight === 3 ? 'border-red-500 bg-red-50/70' : 'border-red-200 bg-red-50/30'
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-semibold text-slate-700">Deploy Button</span>
-                <span className="text-[10px] font-bold text-red-600 bg-white px-2 py-0.5 rounded border border-red-300">
-                  Callout #3: outline: none
-                </span>
-              </div>
-              <p className="text-[11px] text-red-800 leading-tight">
-                Keyboard Tab focus becomes 100% invisible. Motor-impaired and keyboard users are stuck.
-              </p>
-            </div>
-
-          </div>
-
-          <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-red-700 flex items-center gap-1.5 font-medium">
-            <AlertTriangle className="w-3.5 h-3.5 text-red-600 shrink-0" />
-            <span>Hover over any callout above to inspect the specific failure mode.</span>
-          </div>
-        </div>
-
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#171717]/80">
+                {isSelected ? 'Active View' : 'Click to inspect'}
+              </span>
+            </button>
+          );
+        })}
       </div>
 
-      {/* 3 Concise Observations at the Bottom */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-        {observations.map((obs) => (
-          <div 
-            key={obs.id}
-            className={`p-4 rounded-2xl border ${obs.color} shadow-2xs transition-all`}
-          >
-            <div className="flex items-center justify-between mb-1.5">
-              <div className="flex items-center gap-2">
-                {obs.icon}
-                <span className="text-xs font-bold">{obs.title}</span>
-              </div>
-              <span className="text-[10px] font-mono uppercase font-semibold opacity-75">
-                {obs.tag}
-              </span>
+      {/* Detailed Inspection Panel for Selected Category */}
+      <div className="bg-white border-2 border-[#171717] rounded-2xl shadow-[5px_5px_0px_#171717] p-5 sm:p-7 mb-6">
+        <div className="flex items-center justify-between pb-3 border-b-2 border-[#171717] mb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 rounded-lg bg-[#FFF4E5] border-2 border-[#171717] shadow-[1.5px_1.5px_0px_#171717]">
+              {activeCategory.icon}
             </div>
-            <p className="text-[11px] leading-relaxed opacity-90">
-              {obs.description}
+            <div>
+              <h2 className="text-base sm:text-lg font-black text-[#171717] uppercase">
+                {activeCategory.title} Disabilities & Interaction
+              </h2>
+              <p className="text-xs text-[#525252]">How assistive tools interface with your frontend code</p>
+            </div>
+          </div>
+          <span className="hidden sm:inline-block text-[11px] font-mono font-bold px-2.5 py-1 bg-[#171717] text-white rounded">
+            WCAG 2.1 PRINCIPLE
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+          <div className="p-4 rounded-xl bg-[#FFF8EE] border-2 border-[#171717]">
+            <span className="text-[10px] font-mono font-black uppercase text-[#F28C28] block mb-1">
+              Assistive Technologies
+            </span>
+            <p className="text-[#171717] font-medium leading-relaxed">
+              {activeCategory.assistiveTech}
             </p>
           </div>
-        ))}
+
+          <div className="p-4 rounded-xl bg-[#FEF2F2] border-2 border-[#171717]">
+            <span className="text-[10px] font-mono font-black uppercase text-[#B91C1C] block mb-1">
+              Common Web Barriers
+            </span>
+            <p className="text-[#171717] font-medium leading-relaxed">
+              {activeCategory.barriers}
+            </p>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#FFF4E5] border-2 border-[#171717]">
+            <span className="text-[10px] font-mono font-black uppercase text-[#171717] block mb-1">
+              AI Code Vulnerability
+            </span>
+            <p className="text-[#171717] font-medium leading-relaxed">
+              {activeCategory.aiRisk}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* The Disability Spectrum Banner */}
+      <div className="bg-[#FFF8EE] border-2 border-[#171717] rounded-xl p-4 sm:p-5 shadow-[3px_3px_0px_#171717]">
+        <div className="flex items-center gap-2 mb-2">
+          <Sun className="w-4 h-4 text-[#F28C28]" />
+          <h3 className="text-xs font-black uppercase tracking-wider text-[#171717]">
+            The Persona Spectrum: Accessibility Benefits Everyone
+          </h3>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div className="p-3 bg-white rounded-lg border border-[#171717]">
+            <strong className="block text-[#171717] font-black text-xs mb-0.5">1. Permanent</strong>
+            <p className="text-[#525252] text-[11px] leading-relaxed">
+              Deafness, low vision, paralysis, or neurological conditions. Assistive technologies are essential daily tools.
+            </p>
+          </div>
+
+          <div className="p-3 bg-white rounded-lg border border-[#171717]">
+            <strong className="block text-[#171717] font-black text-xs mb-0.5">2. Temporary</strong>
+            <p className="text-[#525252] text-[11px] leading-relaxed">
+              A broken dominant arm, eye dilation surgery, or ear infection. Relies on keyboard navigation and high contrast.
+            </p>
+          </div>
+
+          <div className="p-3 bg-white rounded-lg border border-[#171717]">
+            <strong className="block text-[#171717] font-black text-xs mb-0.5">3. Situational</strong>
+            <p className="text-[#525252] text-[11px] leading-relaxed">
+              Holding a child with one hand, severe sunlight glare on a laptop screen, or working in a loud café without earbuds.
+            </p>
+          </div>
+        </div>
       </div>
 
     </div>

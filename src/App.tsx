@@ -82,12 +82,12 @@ const PresentationShell: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F7F8FC] text-[#172033] antialiased selection:bg-[#5B5CE2] selection:text-white">
+    <div className="min-h-screen flex flex-col bg-[#FFF8EE] text-[#171717] antialiased selection:bg-[#F28C28] selection:text-[#171717]">
       
       {/* Accessible Skip Link */}
       <a
         href="#main-presentation-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 z-50 px-4 py-2 bg-[#5B5CE2] text-white rounded-xl font-bold shadow-lg"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 z-50 px-4 py-2 bg-[#F28C28] text-[#171717] border-2 border-[#171717] rounded-lg font-black shadow-[3px_3px_0px_#171717]"
       >
         Skip to main content
       </a>

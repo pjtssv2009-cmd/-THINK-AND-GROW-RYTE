@@ -1,280 +1,160 @@
 import React, { useState } from 'react';
-import { 
-  Keyboard, 
-  ArrowRight, 
-  RotateCcw
-} from 'lucide-react';
+import { Sun, CheckCircle2, XCircle, Sliders } from 'lucide-react';
 
 export const Slide05KeyboardTrap: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
-  const [isBrokenMode, setIsBrokenMode] = useState<boolean>(true);
-
-  // Focus sequence steps across the controls
-  const focusSteps = [
-    { id: 0, label: 'Start (Unfocused)' },
-    { id: 1, label: 'Field 1: Name Input' },
-    { id: 2, label: 'Field 2: Email Input' },
-    { id: 3, label: 'Control 3: Filter (Div or Button)' },
-    { id: 4, label: 'Control 4: Submit Button' },
-  ];
-
-  const handleNextTab = () => {
-    setCurrentStep(prev => (prev < 4 ? prev + 1 : 0));
-  };
-
-  const handleReset = () => {
-    setCurrentStep(0);
-  };
+  const [glareMode, setGlareMode] = useState<boolean>(false);
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-4 sm:py-6 px-4 flex flex-col animate-slide-in">
+    <div className="w-full max-w-5xl mx-auto py-4 sm:py-6 px-4 flex flex-col animate-slide-in">
       
       {/* Slide Header */}
       <div className="mb-5 text-center max-w-3xl mx-auto">
-        <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-[#5B5CE2] bg-[#EEF0FD] px-3 py-1 rounded-full border border-[#5B5CE2]/20">
-          BUG 02 DEEP DIVE • KEYBOARD ACCESSIBILITY
+        <span className="text-xs font-mono font-black uppercase tracking-wider text-[#171717] bg-[#FFF4E5] px-3.5 py-1 rounded-md border-2 border-[#171717] shadow-[2px_2px_0px_#171717]">
+          WCAG 1.4.3 • LUMINANCE MATHEMATICS
         </span>
-        <h1 className="text-2xl sm:text-4xl font-black text-[#172033] tracking-tight mt-2 mb-2 uppercase">
-          NO MOUSE. NOW WHAT?
+        <h1 className="text-2xl sm:text-4xl font-black text-[#171717] tracking-tight mt-3 mb-2 uppercase">
+          COLOR CONTRAST: THE FIRST LINE OF DEFENSE
         </h1>
-        <p className="text-xs sm:text-sm text-[#667085]">
-          A visual interface can look flawless with a mouse. But when navigation relies solely on the keyboard, stripped outlines leave users stranded.
+        <p className="text-xs sm:text-sm font-semibold text-[#525252]">
+          Low-contrast text is the most widespread automated defect on the web. Subtle gray text may look minimalist in a dark room, but it fails millions in daily use.
         </p>
       </div>
 
-      {/* Mode Selector and Interactive Stepper */}
-      <div className="flex flex-wrap items-center justify-between gap-4 mb-6 bg-white p-3.5 rounded-2xl border border-[#E4E7EC] shadow-2xs">
-        
-        {/* Toggle Broken vs Fixed Mode */}
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider font-mono">
-            Navigation Mode:
-          </span>
-          <div className="bg-slate-100 p-1 rounded-xl flex items-center border border-slate-200">
-            <button
-              type="button"
-              onClick={() => { setIsBrokenMode(true); setCurrentStep(0); }}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                isBrokenMode 
-                  ? 'bg-red-600 text-white shadow-xs' 
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Broken AI (outline: none)
-            </button>
-            <button
-              type="button"
-              onClick={() => { setIsBrokenMode(false); setCurrentStep(0); }}
-              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                !isBrokenMode 
-                  ? 'bg-emerald-600 text-white shadow-xs' 
-                  : 'text-slate-600 hover:text-slate-900'
-              }`}
-            >
-              Fixed (:focus-visible)
-            </button>
+      {/* WCAG Standards Reference Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
+        <div className="bg-white border-2 border-[#171717] rounded-xl p-4 shadow-[3px_3px_0px_#171717]">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-black uppercase text-[#171717]">Normal Body Text</span>
+            <span className="text-[10px] font-mono font-bold bg-[#F28C28] text-[#171717] px-2 py-0.5 rounded border border-[#171717]">
+              Level AA
+            </span>
           </div>
+          <div className="text-3xl font-black text-[#171717] font-mono my-1">
+            4.5 : 1
+          </div>
+          <p className="text-[11px] text-[#525252] leading-tight">
+            Minimum required ratio for all standard paragraphs, labels, and helper copy under 18pt (24px).
+          </p>
         </div>
 
-        {/* Presenter Step Button */}
-        <div className="flex items-center gap-3">
-          <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-600">
-            <span>Step {currentStep} / 4:</span>
-            <span className="font-bold text-[#5B5CE2]">
-              {focusSteps[currentStep].label}
+        <div className="bg-white border-2 border-[#171717] rounded-xl p-4 shadow-[3px_3px_0px_#171717]">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-black uppercase text-[#171717]">Large Headlines</span>
+            <span className="text-[10px] font-mono font-bold bg-[#F28C28] text-[#171717] px-2 py-0.5 rounded border border-[#171717]">
+              Level AA
+            </span>
+          </div>
+          <div className="text-3xl font-black text-[#171717] font-mono my-1">
+            3.0 : 1
+          </div>
+          <p className="text-[11px] text-[#525252] leading-tight">
+            Required for titles ≥ 18pt (24px) or bold text ≥ 14pt (18.5px).
+          </p>
+        </div>
+
+        <div className="bg-white border-2 border-[#171717] rounded-xl p-4 shadow-[3px_3px_0px_#171717]">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-xs font-black uppercase text-[#171717]">UI Controls & Borders</span>
+            <span className="text-[10px] font-mono font-bold bg-[#171717] text-white px-2 py-0.5 rounded">
+              WCAG 1.4.11
+            </span>
+          </div>
+          <div className="text-3xl font-black text-[#171717] font-mono my-1">
+            3.0 : 1
+          </div>
+          <p className="text-[11px] text-[#525252] leading-tight">
+            Input field borders, toggle switches, and focus outlines against their adjacent backgrounds.
+          </p>
+        </div>
+      </div>
+
+      {/* Interactive Glare Simulator Toggle */}
+      <div className="flex items-center justify-between bg-white border-2 border-[#171717] rounded-xl p-3 mb-6 shadow-[3px_3px_0px_#171717]">
+        <div className="flex items-center gap-2">
+          <Sun className="w-4 h-4 text-[#F28C28]" />
+          <span className="text-xs font-black uppercase text-[#171717]">
+            Live Usability Test: Sunlight Glare Simulation
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setGlareMode(!glareMode)}
+          className={`px-3 py-1.5 rounded-lg text-xs font-bold border-2 border-[#171717] transition-all flex items-center gap-1.5 focus-visible:outline-3 focus-visible:outline-[#F28C28] ${
+            glareMode
+              ? 'bg-[#F28C28] text-[#171717] shadow-[2px_2px_0px_#171717]'
+              : 'bg-[#FFF8EE] text-[#171717] hover:bg-[#FFF4E5] shadow-[2px_2px_0px_#171717]'
+          }`}
+          aria-pressed={glareMode}
+        >
+          <Sliders className="w-3.5 h-3.5" />
+          <span>{glareMode ? 'Glare Simulation: ACTIVE' : 'Enable Sunlight Glare'}</span>
+        </button>
+      </div>
+
+      {/* Side-by-Side Large Comparison */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
+        
+        {/* Bad Example */}
+        <div className={`p-6 rounded-2xl border-2 border-[#B91C1C] relative overflow-hidden transition-all shadow-[4px_4px_0px_#B91C1C] ${
+          glareMode ? 'bg-[#FFFFFF] brightness-125 opacity-70 contrast-75' : 'bg-white'
+        }`}>
+          <div className="flex items-center justify-between pb-3 border-b-2 border-red-200 mb-4">
+            <span className="text-xs font-black uppercase tracking-wider text-[#B91C1C] flex items-center gap-1.5">
+              <XCircle className="w-4 h-4" />
+              <span>AI Default (Low Contrast)</span>
+            </span>
+            <span className="text-xs font-mono font-black text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200">
+              1.8 : 1 (FAILS AA)
             </span>
           </div>
 
-          <button
-            type="button"
-            onClick={handleNextTab}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#5B5CE2] hover:bg-[#4C4DD0] text-white text-xs font-bold shadow-xs active:scale-95 transition-all focus-visible:ring-2 focus-visible:ring-indigo-300"
-          >
-            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px] font-mono">TAB</span>
-            <span>Simulate Tab Step</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
-
-          <button
-            type="button"
-            onClick={handleReset}
-            className="p-2 text-slate-400 hover:text-slate-700 hover:bg-slate-100 rounded-xl transition-colors"
-            title="Reset focus simulation"
-            aria-label="Reset focus simulation"
-          >
-            <RotateCcw className="w-4 h-4" />
-          </button>
-        </div>
-
-      </div>
-
-      {/* Main Focus Simulation Sandbox */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        {/* Left: Interactive Interface with Animated Focus Sequence */}
-        <div className="lg:col-span-7 bg-white rounded-3xl border border-[#E4E7EC] shadow-card p-6 sm:p-7 relative overflow-hidden">
-          
-          <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-5">
-            <div className="flex items-center gap-2">
-              <Keyboard className="w-4 h-4 text-[#5B5CE2]" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-800">
-                Live Focus Path Simulator
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1 text-[11px] font-mono text-slate-400">
-              <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded font-bold text-slate-700">TAB</kbd>
-              <span>+</span>
-              <kbd className="px-1.5 py-0.5 bg-slate-100 border border-slate-200 rounded font-bold text-slate-700">ENTER</kbd>
-            </div>
-          </div>
-
-          {/* Simulated Controls with Dynamic Focus Styles */}
-          <div className="space-y-4">
-            
-            {/* Control 1: Name Input */}
-            <div className="relative">
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                1. Full Name
-              </label>
-              <div 
-                className={`w-full px-4 py-2.5 rounded-xl border text-xs transition-all ${
-                  currentStep === 1
-                    ? isBrokenMode
-                      ? 'border-slate-300 bg-white ring-0 shadow-none' // outline: none! Invisible!
-                      : 'border-[#5B5CE2] bg-indigo-50/20 ring-4 ring-indigo-200 shadow-sm' // High-contrast ring
-                    : 'border-slate-200 bg-white'
-                }`}
-              >
-                Alex Chen
-              </div>
-              {currentStep === 1 && (
-                <div className={`mt-1 text-[10px] font-mono flex items-center gap-1 ${
-                  isBrokenMode ? 'text-red-600' : 'text-emerald-700 font-bold'
-                }`}>
-                  {isBrokenMode ? '⚠️ Focus is here, but outline is completely invisible!' : '✓ High contrast 2px focus ring clearly visible'}
-                </div>
-              )}
-            </div>
-
-            {/* Control 2: Email Input */}
-            <div className="relative">
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                2. Email Address
-              </label>
-              <div 
-                className={`w-full px-4 py-2.5 rounded-xl border text-xs transition-all ${
-                  currentStep === 2
-                    ? isBrokenMode
-                      ? 'border-slate-300 bg-white ring-0 shadow-none' // outline: none!
-                      : 'border-[#5B5CE2] bg-indigo-50/20 ring-4 ring-indigo-200 shadow-sm'
-                    : 'border-slate-200 bg-white'
-                }`}
-              >
-                alex.chen@company.com
-              </div>
-              {currentStep === 2 && (
-                <div className={`mt-1 text-[10px] font-mono flex items-center gap-1 ${
-                  isBrokenMode ? 'text-red-600' : 'text-emerald-700 font-bold'
-                }`}>
-                  {isBrokenMode ? '⚠️ Tab moved, but user has no clue which field has focus.' : '✓ Custom ring with 2px offset guides the user'}
-                </div>
-              )}
-            </div>
-
-            {/* Control 3: Dropdown / Filter (Div vs Semantic Button) */}
-            <div className="relative">
-              <label className="text-xs font-semibold text-slate-700 block mb-1">
-                3. Priority Level (Custom Component)
-              </label>
-              <div 
-                className={`w-full px-4 py-2.5 rounded-xl border text-xs flex items-center justify-between transition-all ${
-                  currentStep === 3
-                    ? isBrokenMode
-                      ? 'border-dashed border-red-300 bg-red-50/40 text-slate-400' // SKIPPED because it's a div!
-                      : 'border-[#5B5CE2] bg-indigo-50/20 ring-4 ring-indigo-200 font-bold'
-                    : 'border-slate-200 bg-white text-slate-700'
-                }`}
-              >
-                <span>Medium Priority</span>
-                <span className="text-[10px] font-mono text-slate-400">
-                  {isBrokenMode ? '<div onClick>' : '<button type="button">'}
-                </span>
-              </div>
-              {currentStep === 3 && (
-                <div className={`mt-1 text-[10px] font-mono flex items-center gap-1 ${
-                  isBrokenMode ? 'text-red-600 font-bold' : 'text-emerald-700 font-bold'
-                }`}>
-                  {isBrokenMode 
-                    ? '🚫 SKIPPED! Built as a <div> with no tabIndex or keydown listeners.' 
-                    : '✓ Semantic <button> safely receives Tab focus & Enter activation.'}
-                </div>
-              )}
-            </div>
-
-            {/* Control 4: Submit Button */}
-            <div className="pt-2 flex items-center justify-between">
-              <div 
-                className={`px-6 py-2.5 rounded-xl text-xs font-bold text-white transition-all ${
-                  currentStep === 4
-                    ? isBrokenMode
-                      ? 'bg-slate-900' // Invisible focus
-                      : 'bg-[#5B5CE2] ring-4 ring-indigo-300 shadow-md'
-                    : 'bg-slate-900'
-                }`}
-              >
-                Submit Form
-              </div>
-
-              {currentStep === 4 && (
-                <div className={`text-[10px] font-mono flex items-center gap-1 ${
-                  isBrokenMode ? 'text-red-600 font-bold' : 'text-emerald-700 font-bold'
-                }`}>
-                  {isBrokenMode ? '❌ outline: none applied' : '✓ :focus-visible activated'}
-                </div>
-              )}
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* Right: Technical Explanation & CSS Rules */}
-        <div className="lg:col-span-5 space-y-4">
-          
-          <div className="bg-[#172033] rounded-3xl p-6 text-white shadow-card space-y-4">
-            <div className="flex items-center justify-between pb-3 border-b border-slate-800">
-              <span className="text-xs font-mono font-bold text-slate-300">
-                CSS Best Practice
-              </span>
-              <span className="text-[10px] font-mono text-emerald-400 font-bold">
-                WCAG 2.4.7
-              </span>
-            </div>
-
-            <pre className="text-xs font-mono text-emerald-300 leading-relaxed bg-slate-950/70 p-3.5 rounded-xl border border-emerald-500/30 overflow-x-auto">
-{`/* Accessible focus-visible pattern */
-button:focus-visible,
-input:focus-visible {
-  outline: 2px solid #5B5CE2;
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(91, 92, 226, 0.15);
-}`}
-            </pre>
-
-            <p className="text-xs text-slate-300 leading-relaxed">
-              <strong className="text-white block mb-0.5">The Beauty of :focus-visible:</strong>
-              Mouse clicks stay aesthetically pristine (no rings), but keyboard Tab navigation immediately illuminates the control with an unmistakable ring.
+          <div className="space-y-3">
+            <h3 className="text-base font-bold text-[#A0AEC0]">
+              Account Authentication Credentials
+            </h3>
+            <p className="text-xs text-[#CBD5E1] leading-relaxed">
+              Please enter your corporate single sign-on address and security token to synchronize deployment logs across your internal microservices cluster.
             </p>
+            <div className="p-3 rounded-lg border border-[#E2E8F0] bg-slate-50 text-[11px] text-[#CBD5E1]">
+              Token helper: Keys expire after 24 hours of inactivity.
+            </div>
           </div>
 
-          <div className="bg-amber-50 p-4 rounded-2xl border border-amber-200 text-xs text-amber-950 leading-relaxed">
-            <strong className="text-amber-900 block font-bold mb-1">
-              Why AI Prompts Get This Wrong:
-            </strong>
-            Many training datasets contain CSS resets with <code className="font-mono bg-white px-1 py-0.5 rounded text-red-600">* &#123; outline: none !important; &#125;</code> copied from legacy Dribbble templates.
+          <div className="mt-4 pt-3 border-t border-red-100 text-[11px] font-bold text-red-700 bg-red-50 p-2 rounded">
+            ❌ Fails WCAG AA. Washes out completely under ambient lighting.
+          </div>
+        </div>
+
+        {/* Corrected Example */}
+        <div className={`p-6 rounded-2xl border-2 border-[#15803D] relative overflow-hidden transition-all shadow-[4px_4px_0px_#15803D] ${
+          glareMode ? 'bg-[#FFFFFF] brightness-125 opacity-90 contrast-90' : 'bg-white'
+        }`}>
+          <div className="flex items-center justify-between pb-3 border-b-2 border-emerald-200 mb-4">
+            <span className="text-xs font-black uppercase tracking-wider text-[#15803D] flex items-center gap-1.5">
+              <CheckCircle2 className="w-4 h-4" />
+              <span>Engineered Standard (Accessible)</span>
+            </span>
+            <span className="text-xs font-mono font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              16.1 : 1 (PASSES AAA)
+            </span>
           </div>
 
+          <div className="space-y-3">
+            <h3 className="text-base font-black text-[#171717]">
+              Account Authentication Credentials
+            </h3>
+            <p className="text-xs text-[#171717] font-medium leading-relaxed">
+              Please enter your corporate single sign-on address and security token to synchronize deployment logs across your internal microservices cluster.
+            </p>
+            <div className="p-3 rounded-lg border-2 border-[#171717] bg-[#FFF8EE] text-[11px] text-[#171717] font-semibold">
+              Token helper: Keys expire after 24 hours of inactivity.
+            </div>
+          </div>
+
+          <div className="mt-4 pt-3 border-t border-emerald-100 text-[11px] font-bold text-emerald-800 bg-emerald-50 p-2 rounded">
+            ✓ Exceeds WCAG AAA. Remains crystal-clear across all screen types and glare conditions.
+          </div>
         </div>
 
       </div>

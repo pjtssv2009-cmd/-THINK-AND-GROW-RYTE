@@ -1,6 +1,6 @@
 import React from 'react';
 import { usePresentation } from '../context/GameStateContext';
-import { X, Clock, CheckCircle2, Lightbulb } from 'lucide-react';
+import { X, Clock, Lightbulb, CheckCircle2 } from 'lucide-react';
 
 export const PresenterNotes: React.FC = () => {
   const {
@@ -16,20 +16,20 @@ export const PresenterNotes: React.FC = () => {
     <aside
       role="complementary"
       aria-label="Presenter Notes"
-      className="fixed bottom-16 right-4 md:right-8 w-96 max-w-[calc(100vw-2rem)] max-h-[75vh] bg-white rounded-3xl shadow-panel border border-[#E4E7EC] z-50 flex flex-col overflow-hidden animate-slide-in"
+      className="fixed bottom-16 right-4 md:right-8 w-96 max-w-[calc(100vw-2rem)] max-h-[75vh] bg-white border-2 border-[#171717] rounded-xl shadow-[6px_6px_0px_#171717] z-50 flex flex-col overflow-hidden animate-slide-in"
     >
       {/* Header */}
-      <div className="bg-[#172033] text-white px-5 py-3.5 flex items-center justify-between">
+      <div className="bg-[#F28C28] text-[#171717] px-4 py-3 flex items-center justify-between border-b-2 border-[#171717]">
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-200">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#171717]" />
+          <h2 className="text-xs font-black uppercase tracking-wider text-[#171717]">
             Presenter Notes (Press P)
           </h2>
         </div>
         <button
           type="button"
           onClick={togglePresenterNotes}
-          className="text-slate-400 hover:text-white p-1 rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-indigo-400"
+          className="text-[#171717] bg-white hover:bg-[#FFF4E5] p-1 rounded border-2 border-[#171717] shadow-[1px_1px_0px_#171717] transition-all focus-visible:outline-2 focus-visible:outline-[#171717]"
           aria-label="Close Presenter Notes"
         >
           <X className="w-4 h-4" />
@@ -37,59 +37,47 @@ export const PresenterNotes: React.FC = () => {
       </div>
 
       {/* Body */}
-      <div className="p-5 overflow-y-auto space-y-4 text-slate-800 text-xs">
+      <div className="p-4 overflow-y-auto space-y-3.5 text-[#171717] text-xs">
         {/* Slide Info & Timing */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center justify-between pb-2.5 border-b-2 border-[#171717]">
           <div>
-            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+            <span className="text-[10px] font-mono font-black uppercase tracking-wider text-[#525252]">
               SLIDE {currentSlide.slideNumber} / {totalSlides}
             </span>
-            <h3 className="text-sm font-bold text-slate-900 mt-0.5">
+            <h3 className="text-sm font-black text-[#171717] mt-0.5">
               {currentSlide.title}
             </h3>
           </div>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-amber-50 text-amber-800 rounded-lg border border-amber-200 font-semibold shrink-0">
-            <Clock className="w-3.5 h-3.5 text-amber-600" />
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-[#FFF4E5] text-[#171717] rounded border-2 border-[#171717] shadow-[1.5px_1.5px_0px_#171717] font-mono font-bold shrink-0">
+            <Clock className="w-3.5 h-3.5 text-[#F28C28]" />
             <span>{currentSlide.durationMin}m</span>
           </div>
         </div>
 
         {/* Slide Goal */}
-        <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
-          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
-            Slide Concept
+        <div className="bg-[#FFF8EE] p-3 rounded-lg border-2 border-[#171717]">
+          <span className="text-[10px] font-mono font-black uppercase tracking-wider text-[#525252] block mb-1">
+            Core Headline
           </span>
-          <p className="font-semibold text-slate-800 leading-snug">
-            {currentSlide.headline}
-          </p>
-          <p className="text-[11px] text-slate-500 mt-1">
-            {currentSlide.description}
+          <p className="font-bold text-xs text-[#171717] leading-snug">
+            "{currentSlide.headline}"
           </p>
         </div>
 
-        {/* Talking points */}
+        {/* Key Talking Points */}
         <div>
-          <h4 className="font-bold text-slate-900 uppercase tracking-wider text-[11px] mb-2.5 flex items-center gap-1.5">
-            <CheckCircle2 className="w-3.5 h-3.5 text-[#5B5CE2]" />
-            <span>Key Talking Points</span>
-          </h4>
+          <div className="flex items-center gap-1.5 text-xs font-black text-[#171717] mb-2 uppercase tracking-wide">
+            <Lightbulb className="w-3.5 h-3.5 text-[#F28C28]" />
+            <span>Presenter Talking Points</span>
+          </div>
           <ul className="space-y-2">
-            {currentSlide.talkingPoints.map((point, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-slate-600 leading-relaxed text-[11px]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#5B5CE2] mt-1.5 shrink-0" />
-                <span>{point}</span>
+            {currentSlide.talkingPoints.map((point, index) => (
+              <li key={index} className="flex items-start gap-2 bg-slate-50 p-2.5 rounded border border-[#171717]/40 leading-relaxed text-[11px]">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#15803D] shrink-0 mt-0.5" />
+                <span className="text-[#171717] font-medium">{point}</span>
               </li>
             ))}
           </ul>
-        </div>
-
-        {/* Presentation Delivery Tip */}
-        <div className="bg-indigo-50/70 p-3 rounded-xl border border-indigo-100 flex items-start gap-2">
-          <Lightbulb className="w-4 h-4 text-[#5B5CE2] shrink-0 mt-0.5" />
-          <div className="text-[11px] text-slate-600 leading-relaxed">
-            <strong className="text-indigo-900 block font-semibold mb-0.5">Delivery Tip:</strong>
-            Use the interactive elements on this slide to demonstrate concepts visually rather than merely reading the text.
-          </div>
         </div>
       </div>
     </aside>

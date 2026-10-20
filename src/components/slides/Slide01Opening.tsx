@@ -1,203 +1,163 @@
 import React, { useState } from 'react';
 import { usePresentation } from '../../context/GameStateContext';
 import { BRANDING } from '../../constants/branding';
-import { 
-  Clock, 
-  Target, 
-  ArrowRight, 
-  Search, 
-  UserCheck, 
-  Edit2, 
-  Check, 
-  Terminal
-} from 'lucide-react';
+import { ArrowRight, Edit3, Check, Sparkles, AlertTriangle, ShieldCheck } from 'lucide-react';
 
 export const Slide01Opening: React.FC = () => {
-  const { goToNextSlide, presenterName, setPresenterName } = usePresentation();
+  const { presenterName, setPresenterName, goToNextSlide } = usePresentation();
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [tempName, setTempName] = useState(presenterName);
 
-  const [isEditingPresenter, setIsEditingPresenter] = useState(false);
-  const [tempPresenter, setTempPresenter] = useState(presenterName);
-
-  const handleSavePresenter = () => {
-    if (tempPresenter.trim()) {
-      setPresenterName(tempPresenter.trim());
+  const handleSaveName = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (tempName.trim()) {
+      setPresenterName(tempName.trim());
     }
-    setIsEditingPresenter(false);
+    setIsEditingName(false);
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-6 sm:py-10 px-4 flex flex-col items-center justify-center animate-slide-in">
+    <div className="w-full max-w-5xl mx-auto py-4 sm:py-8 px-4 flex flex-col items-center animate-slide-in">
       
-      {/* Program Badge & Mission Tag */}
-      <div className="flex flex-wrap items-center justify-center gap-2.5 mb-6">
-        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#E4E7EC] shadow-2xs">
-          <img 
-            src={BRANDING.LOGO_SRC} 
-            alt={BRANDING.LOGO_ALT}
-            className="w-4 h-4 object-contain rounded"
-          />
-          <span className="text-xs font-black uppercase tracking-wider text-[#172033]">
-            {BRANDING.PROGRAM_NAME}
-          </span>
-          <span className="w-1 h-1 rounded-full bg-slate-300" />
-          <span className="text-xs font-semibold text-[#667085]">
-            {BRANDING.SUBTITLE}
-          </span>
-        </div>
-
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#EEF0FD] border border-[#5B5CE2]/20 text-[#5B5CE2] text-xs font-mono font-bold tracking-tight">
-          <Target className="w-3.5 h-3.5" />
-          <span>{BRANDING.MISSION_IDENTIFIER}</span>
-        </div>
+      {/* Neo-brutalist Mission & Branding Tag */}
+      <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-lg bg-[#FFF4E5] border-2 border-[#171717] shadow-[2px_2px_0px_#171717] mb-6">
+        <span className="w-2.5 h-2.5 rounded-full bg-[#F28C28] border border-[#171717]" />
+        <span className="text-xs font-mono font-black uppercase tracking-wider text-[#171717]">
+          {BRANDING.PROGRAM_NAME} • {BRANDING.MISSION_IDENTIFIER}
+        </span>
       </div>
 
-      {/* Main Cinematic Title */}
-      <div className="text-center max-w-4xl mb-4">
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#172033] tracking-tight leading-[1.1] uppercase">
-          AI CAN BUILD IT. <br />
-          <span className="text-[#5B5CE2] inline-block mt-1">
-            BUT CAN EVERYONE USE IT?
-          </span>
-        </h1>
-      </div>
-
-      {/* Editorial Subtitle */}
-      <p className="text-base sm:text-xl text-[#667085] text-center max-w-2xl leading-relaxed mb-8 font-normal">
-        {BRANDING.PRESENTATION_SUBTITLE}
-      </p>
-
-      {/* Presenter Name Badge */}
-      <div className="flex items-center gap-2 mb-8 bg-white px-4 py-2 rounded-xl border border-[#E4E7EC] shadow-2xs text-xs sm:text-sm">
-        <UserCheck className="w-4 h-4 text-[#5B5CE2] shrink-0" />
-        <span className="text-slate-500 font-medium">Presenter:</span>
-        {isEditingPresenter ? (
-          <div className="flex items-center gap-1.5">
-            <input
-              type="text"
-              value={tempPresenter}
-              onChange={(e) => setTempPresenter(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleSavePresenter();
-                if (e.key === 'Escape') setIsEditingPresenter(false);
-              }}
-              className="px-2 py-0.5 border border-[#5B5CE2] rounded font-semibold text-slate-800 text-xs focus:outline-none"
-              autoFocus
+      {/* Main Title Card */}
+      <div className="w-full bg-white border-2 border-[#171717] rounded-2xl shadow-[6px_6px_0px_#171717] p-6 sm:p-10 mb-8 relative overflow-hidden bg-grid-neo">
+        
+        {/* Top Decorative Header Strip */}
+        <div className="flex items-center justify-between pb-4 border-b-2 border-[#171717] mb-6">
+          <div className="flex items-center gap-2.5">
+            <img 
+              src={BRANDING.LOGO_SRC} 
+              alt={BRANDING.LOGO_ALT}
+              className="w-8 h-8 object-contain p-0.5 border-2 border-[#171717] rounded bg-white shadow-[2px_2px_0px_#171717]"
             />
-            <button
-              type="button"
-              onClick={handleSavePresenter}
-              className="p-1 text-emerald-600 hover:bg-emerald-50 rounded"
-              aria-label="Save presenter name"
-            >
-              <Check className="w-3.5 h-3.5" />
-            </button>
-          </div>
-        ) : (
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-800">{presenterName}</span>
-            <button
-              type="button"
-              onClick={() => {
-                setTempPresenter(presenterName);
-                setIsEditingPresenter(true);
-              }}
-              className="text-slate-400 hover:text-[#5B5CE2] p-0.5 rounded transition-colors"
-              title="Edit presenter name"
-              aria-label="Edit presenter name"
-            >
-              <Edit2 className="w-3 h-3" />
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Elegant Browser-Interface Illustration with Hidden-Bug Indicators */}
-      <div className="w-full max-w-3xl bg-white rounded-3xl border border-[#E4E7EC] shadow-float p-6 sm:p-8 mb-8 relative overflow-hidden bg-grid-dots">
-        {/* Subtle accent border line */}
-        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#5B5CE2] via-[#3B82F6] to-[#16A34A]" />
-
-        {/* Browser Mockup Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-100 mb-6">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-red-400/80" />
-            <span className="w-3 h-3 rounded-full bg-amber-400/80" />
-            <span className="w-3 h-3 rounded-full bg-emerald-400/80" />
-            <span className="text-xs font-mono text-slate-400 ml-2">
-              localhost:3000/app/checkout
+            <span className="font-mono text-xs font-black uppercase tracking-widest text-[#171717]">
+              {BRANDING.COMPANY_NAME} KNOWLEDGE SERIES
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono text-slate-400 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200 flex items-center gap-1.5">
-              <Terminal className="w-3 h-3 text-[#5B5CE2]" />
-              <span>Prompt: "Modern minimal checkout form"</span>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-[11px] font-mono font-bold bg-[#F28C28] text-[#171717] px-2 py-0.5 rounded border border-[#171717]">
+              15-MINUTE SESSION
+            </span>
+            <span className="text-[11px] font-mono font-bold bg-[#171717] text-white px-2 py-0.5 rounded">
+              WCAG 2.1 AA
             </span>
           </div>
         </div>
 
-        {/* Browser Mockup Body with Subtle Radar Pins */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-          
-          <div className="md:col-span-8 space-y-4">
-            {/* Form field 1 with subtle pulsing bug indicator */}
-            <div className="relative p-3 rounded-2xl bg-slate-50/80 border border-slate-200">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-700">Cardholder Name</span>
-                <span className="flex items-center gap-1 text-[10px] font-mono text-red-600 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded">
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping" />
-                  <span>Unassociated &lt;span&gt;</span>
-                </span>
-              </div>
-              <div className="h-8 bg-white border border-slate-200 rounded-lg flex items-center px-3">
-                <span className="text-xs text-slate-400">Jane Doe</span>
-              </div>
-            </div>
+        {/* Main Headlines */}
+        <div className="space-y-4 max-w-4xl">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-[#171717] tracking-tight leading-[1.08] uppercase">
+            AI CAN BUILD IT.<br />
+            <span className="text-[#F28C28] underline decoration-[#171717] decoration-4 underline-offset-4">
+              BUT CAN EVERYONE USE IT?
+            </span>
+          </h1>
 
-            {/* Form field 2 with contrast indicator */}
-            <div className="relative p-3 rounded-2xl bg-slate-50/80 border border-slate-200">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium text-slate-700">Billing Postal Code</span>
-                <span className="flex items-center gap-1 text-[10px] font-mono text-amber-600 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
-                  <span>Low Contrast: 1.8:1</span>
-                </span>
-              </div>
-              <div className="h-8 bg-white border border-slate-200 rounded-lg flex items-center px-3">
-                <span className="text-xs text-[#CBD5E1]">10001 (Faint text)</span>
-              </div>
+          <p className="text-base sm:text-xl font-bold text-[#525252] max-w-2xl leading-relaxed">
+            {BRANDING.PRESENTATION_SUBTITLE}
+          </p>
+        </div>
+
+        {/* Educational Context Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8 pt-6 border-t-2 border-[#171717]">
+          <div className="p-4 rounded-xl border-2 border-[#171717] bg-[#FFF8EE] shadow-[3px_3px_0px_#171717]">
+            <div className="flex items-center gap-2 text-xs font-black text-[#171717] uppercase mb-1">
+              <Sparkles className="w-4 h-4 text-[#F28C28]" />
+              <span>Speed of Generation</span>
             </div>
+            <p className="text-xs text-[#525252] leading-relaxed">
+              LLMs and vibe coding generate responsive CSS and complex component layouts in seconds.
+            </p>
           </div>
 
-          {/* Right: Floating Game-inspired Mission Badge */}
-          <div className="md:col-span-4 flex flex-col items-center justify-center p-4 bg-indigo-50/60 rounded-2xl border border-indigo-100 text-center">
-            <div className="w-12 h-12 rounded-2xl bg-[#5B5CE2] text-white flex items-center justify-center shadow-md mb-2 animate-float-soft">
-              <Search className="w-6 h-6" />
+          <div className="p-4 rounded-xl border-2 border-[#171717] bg-[#FFF4E5] shadow-[3px_3px_0px_#171717]">
+            <div className="flex items-center gap-2 text-xs font-black text-[#171717] uppercase mb-1">
+              <AlertTriangle className="w-4 h-4 text-[#B91C1C]" />
+              <span>Hidden Exclusion</span>
             </div>
-            <div className="text-xs font-bold text-slate-900">
-              Accessibility Lens
-            </div>
-            <div className="text-[11px] text-slate-500 mt-1 leading-snug">
-              Discover what automated LLMs overlook in generated UI code.
-            </div>
-            <div className="mt-3 flex items-center gap-1.5 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-              <Clock className="w-3 h-3" />
-              <span>15 Min Session</span>
-            </div>
+            <p className="text-xs text-[#525252] leading-relaxed">
+              Default AI prompts routinely omit programmatic labels, contrast math, and keyboard focus outlines.
+            </p>
           </div>
 
+          <div className="p-4 rounded-xl border-2 border-[#171717] bg-[#F0FDF4] shadow-[3px_3px_0px_#171717]">
+            <div className="flex items-center gap-2 text-xs font-black text-[#171717] uppercase mb-1">
+              <ShieldCheck className="w-4 h-4 text-[#15803D]" />
+              <span>The Engineering Goal</span>
+            </div>
+            <p className="text-xs text-[#525252] leading-relaxed">
+              Learn practical auditing, code fixes, and verification to ship accessible software at AI speed.
+            </p>
+          </div>
         </div>
 
       </div>
 
-      {/* Primary Action Button */}
-      <button
-        type="button"
-        onClick={goToNextSlide}
-        className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-2xl bg-[#5B5CE2] hover:bg-[#4C4DD0] text-white text-sm font-bold shadow-card hover:shadow-float transition-all active:scale-[0.98] focus-visible:ring-4 focus-visible:ring-indigo-300"
-      >
-        <span>START PRESENTATION</span>
-        <ArrowRight className="w-4 h-4" />
-      </button>
+      {/* Presenter Attribution & Primary Start Action */}
+      <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 bg-white border-2 border-[#171717] rounded-xl p-4 sm:p-5 shadow-[4px_4px_0px_#171717]">
+        
+        {/* Presenter Name Editor */}
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <span className="text-xs font-mono font-bold uppercase text-[#525252]">Presented By:</span>
+          {isEditingName ? (
+            <form onSubmit={handleSaveName} className="flex items-center gap-1.5">
+              <input
+                type="text"
+                value={tempName}
+                onChange={(e) => setTempName(e.target.value)}
+                autoFocus
+                className="px-2.5 py-1 text-xs font-bold border-2 border-[#171717] rounded bg-[#FFF4E5] focus-visible:outline-2 focus-visible:outline-[#F28C28]"
+                placeholder="Presenter name"
+              />
+              <button
+                type="submit"
+                className="p-1.5 rounded bg-[#F28C28] text-[#171717] border-2 border-[#171717] shadow-[1px_1px_0px_#171717] hover:bg-[#DF7A1B]"
+                aria-label="Save presenter name"
+              >
+                <Check className="w-3.5 h-3.5" />
+              </button>
+            </form>
+          ) : (
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs font-black text-[#171717] bg-[#FFF8EE] px-2.5 py-1 rounded border border-[#171717]">
+                {presenterName}
+              </span>
+              <button
+                type="button"
+                onClick={() => {
+                  setTempName(presenterName);
+                  setIsEditingName(true);
+                }}
+                className="p-1 text-slate-500 hover:text-[#171717] hover:bg-slate-100 rounded"
+                title="Edit presenter name"
+                aria-label="Edit presenter name"
+              >
+                <Edit3 className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Primary Start Presentation Action */}
+        <button
+          type="button"
+          onClick={goToNextSlide}
+          className="w-full sm:w-auto px-6 py-3 rounded-lg text-sm font-black bg-[#F28C28] hover:bg-[#DF7A1B] text-[#171717] border-2 border-[#171717] shadow-[3px_3px_0px_#171717] active:translate-x-[2px] active:translate-y-[2px] active:shadow-[1px_1px_0px_#171717] transition-all flex items-center justify-center gap-2 focus-visible:outline-3 focus-visible:outline-[#F28C28]"
+        >
+          <span>START PRESENTATION</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+
+      </div>
 
     </div>
   );

@@ -4,16 +4,18 @@
 
 @layer base {
   :root {
-    --bg-page: #F7F8FC;
+    --bg-page: #FFF8EE;
     --surface: #FFFFFF;
-    --text-primary: #172033;
-    --text-secondary: #667085;
-    --accent: #5B5CE2;
-    --accent-blue: #3B82F6;
-    --success: #16A34A;
+    --text-primary: #171717;
+    --text-secondary: #525252;
+    --primary-orange: #F28C28;
+    --primary-hover: #DF7A1B;
+    --primary-light: #FFF4E5;
+    --border-black: #171717;
+    --success: #15803D;
     --warning: #D97706;
-    --error: #DC2626;
-    --border: #E4E7EC;
+    --error: #B91C1C;
+    --border-subtle: #E2E8F0;
   }
 
   body {
@@ -25,56 +27,82 @@
     overflow-x: hidden;
   }
 
-  /* Accessible focus indicators */
+  /* Accessible high-contrast focus indicators with orange ring */
   button:focus-visible,
   a:focus-visible,
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 3px solid var(--primary-orange);
     outline-offset: 2px;
   }
 }
 
-/* Subtle engineering dot grid background for AAA game UI feel */
-.bg-grid-dots {
-  background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
-  background-size: 20px 20px;
+/* Neo-brutalist tactile utilities */
+.neo-box {
+  background-color: #FFFFFF;
+  border: 2px solid #171717;
+  box-shadow: 4px 4px 0px #171717;
 }
 
-/* Slide Entry Transition */
+.neo-box-sm {
+  background-color: #FFFFFF;
+  border: 2px solid #171717;
+  box-shadow: 2px 2px 0px #171717;
+}
+
+.neo-box-lg {
+  background-color: #FFFFFF;
+  border: 2px solid #171717;
+  box-shadow: 6px 6px 0px #171717;
+}
+
+.neo-box-orange {
+  background-color: #FFFFFF;
+  border: 2px solid #171717;
+  box-shadow: 4px 4px 0px #F28C28;
+}
+
+/* Neo-brutalist button hover and tactile pressed interactions */
+.neo-btn {
+  border: 2px solid #171717;
+  box-shadow: 3px 3px 0px #171717;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+}
+
+.neo-btn:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #171717;
+}
+
+.neo-btn:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px #171717;
+}
+
+/* Engineering graph grid */
+.bg-grid-neo {
+  background-image: 
+    linear-gradient(to right, rgba(23, 23, 23, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(23, 23, 23, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Slide Entry Animation */
 @keyframes slideInUp {
   0% {
     opacity: 0;
-    transform: translateY(12px) scale(0.995);
+    transform: translateY(8px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 .animate-slide-in {
-  animation: slideInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes pulseSubtle {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.04); opacity: 0.9; }
-}
-
-@keyframes floatSoft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-.animate-pulse-subtle {
-  animation: pulseSubtle 3s infinite ease-in-out;
-}
-
-.animate-float-soft {
-  animation: floatSoft 3.5s infinite ease-in-out;
+  animation: slideInUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Reduced motion preference */
@@ -89,16 +117,14 @@
 
 /* Custom crisp scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: #FFF8EE;
+  border-left: 1px solid #171717;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #F28C28;
+  border: 1px solid #171717;
 }
