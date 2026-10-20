@@ -1,57 +1,65 @@
-# Think and Grow RYTE: Accessibility Quest
+# Think and Grow RYTE: Interactive Keynote Presentation
 > **"AI Can Build It. But Can Everyone Use It?"**  
-> *Discover, diagnose, and fix hidden accessibility bugs in AI-generated interfaces.*
+> *The hidden accessibility bugs in AI-generated interfaces.*
 
 ---
 
 ## 🌟 Overview
 
-**Think and Grow RYTE** is an internal technology learning session built for engineers, QA analysts, product managers, and designers. Rather than a conventional passive lecture, this application delivers a 15-minute interactive gamified workshop where attendees discover, diagnose, and repair real-world accessibility bugs in AI-generated code.
+**Think and Grow RYTE** is an internal technology learning session built for engineers, QA analysts, product managers, and designers.
+
+This presentation has been redesigned into an **AAA game-inspired, modern SaaS presentation experience** in strict light mode. Rather than behaving like a quiz app or a dashboard, it delivers 10 visually distinct, interactive slides that explain and demonstrate real-world accessibility failures in AI-generated code.
 
 ---
 
 ## 🎨 Visual Design System & Branding
 
-- **Program Name**: `Think and Grow RYTE`
-- **Subtitle**: `Internal Knowledge Sharing`
-- **Company Brand**: DigiRyte (featuring the official logo)
-- **Theme**: Light mode only (Clean SaaS educational aesthetic)
+- **Program Name**: `THINK AND GROW RYTE`
+- **Presentation Title**: `AI CAN BUILD IT. BUT CAN EVERYONE USE IT?`
+- **Subtitle**: `The hidden accessibility bugs in AI-generated interfaces.`
+- **Closing Motto**: *"Build fast. Test thoughtfully. Design for everyone."*
+- **Company Brand**: DigiRyte (featuring the official logo asset at `/digiryte-logo.png`)
+- **Theme**: Light mode only (Clean SaaS + Game UI aesthetic)
 - **Design Tokens**:
-  - **Background**: `#F8FAFC`
-  - **Surface**: `#FFFFFF`
+  - **Background**: `#F7F8FC`
+  - **Main Surface**: `#FFFFFF`
   - **Primary Text**: `#172033`
-  - **Secondary Text**: `#64748B`
+  - **Secondary Text**: `#667085`
   - **Primary Accent**: `#5B5CE2` (Hover: `#4C4DD0`, Light: `#EEF0FD`)
-  - **Secondary Accent**: `#0EA5E9`
+  - **Blue Accent**: `#3B82F6`
   - **Success**: `#16A34A`
   - **Warning**: `#D97706`
   - **Error**: `#DC2626`
-  - **Borders**: `#E2E8F0`
-- **Typography**: Inter with JetBrains Mono for code snippets.
+  - **Border**: `#E4E7EC`
+- **Typography**: Inter with JetBrains Mono for code snippets and technical callouts.
 
 ---
 
-## ⏱️ 15-Minute Session Timing Plan
+## ⏱️ 15-Minute 10-Slide Structure
 
-| Slide / Stage | Duration | Title | Key Interaction |
-| :--- | :---: | :--- | :--- |
-| **Slide 1** | 1 min | **Welcome — Accessibility Quest** | Mission stats, editable presenter name, animated mission briefing modal. |
-| **Slide 2** | 1 min | **The Challenge (The AI Paradox)** | 3 interactive cards & pointer vs keyboard simulation widget. |
-| **Demo A** | 3 min | **The Bug Lab (Discover)** | Realistic SaaS contact form with 5 clickable bug hotspots & diagnosis quizzes. |
-| **Demo B** | 4 min | **Accessibility Detective (Investigate)** | Simulated Lighthouse audit panel & manual keyboard navigation challenge. |
-| **Demo C** | 4 min | **Fix the Bugs (Repair)** | Split-screen broken vs improved form, code diffs, and live keyboard tester. |
-| **Demo D** | 2 min | **Final Boss (Prove Your Skills)** | 3 rapid-fire quiz questions with 20s timers, boss victory, and milestone badge. |
-| **Closing** | 1 min | **Quest Complete (Wrap-Up)** | Final score, 5-point takeaway checklist, copy button, and Q&A. |
+| Slide | Duration | Title | Headline | Key Visual & Interactive Demonstration |
+| :---: | :---: | :--- | :--- | :--- |
+| **01** | 1.0 min | **Cinematic Opening** | *"AI CAN BUILD IT. BUT CAN EVERYONE USE IT?"* | AAA game title card in light mode, DigiRyte logo, mission tag, interactive start button, presenter name editor. |
+| **02** | 1.5 min | **The Reality Check** | *"FUNCTIONAL DOESN'T MEAN USABLE."* | Split-screen visual comparison: AI visual completion vs. real-world accessibility breakdown with 3 core observations. |
+| **03** | 2.0 min | **Enter the Bug Lab** | *"FIVE BUGS. ONE INTERFACE."* | Realistic SaaS contact form with 5 floating bug pins that progressively reveal defect diagnoses without quiz gates. |
+| **04** | 1.5 min | **Bug 01: Invisible Label** | *"THE FIELD EXISTS. THE MEANING DOESN'T."* | Magnified form input, VoiceOver audio announcement simulation, and HTML before-and-after `<label for="...">` snippet. |
+| **05** | 1.5 min | **Bug 02: Keyboard Trap** | *"NO MOUSE. NOW WHAT?"* | Animated Tab focus path simulation across form controls, `<kbd>` visualizer, and CSS `:focus-visible` guide. |
+| **06** | 1.5 min | **Bug 03: Contrast Problem** | *"CAN YOU ACTUALLY READ THIS?"* | Contrast ratio comparisons (1.8:1 vs 4.5:1 vs 7.1:1), sunlight glare simulator, and WCAG AA vs AAA guidance. |
+| **07** | 2.0 min | **The Detective Desk** | *"FIND WHAT THE EYE MISSES."* | Browser inspection workspace with interactive audit scanner, finding severity badges, and automated vs manual explanation. |
+| **08** | 1.5 min | **The Repair Station** | *"LET'S FIX THE EXPERIENCE."* | Split-screen Before & After form comparison, working toggle between broken & fixed examples, and 3 targeted code diffs. |
+| **09** | 1.5 min | **The Proof** | *"BUILD. TEST. VERIFY."* | 3-stage engineering loop (Generate, Test, Verify), audit score verification (74 to 100), and core automated testing caveat. |
+| **10** | 1.0 min | **The Takeaway** | *"SHIP FEATURES. DON'T SHIP BARRIERS."* | Achievement emblem (Accessibility Champion), copyable 5-point engineering checklist, and restart presentation control. |
 
 ---
 
-## 🕹️ Interactive Keyboard Shortcuts
+## 🕹️ Presentation Navigation & Keyboard Shortcuts
 
-- <kbd>→</kbd> / <kbd>Space</kbd>: Next slide (automatically disabled when typing inside input fields).
+- <kbd>→</kbd> / <kbd>Space</kbd>: Next slide (automatically guarded when editing input fields).
 - <kbd>←</kbd>: Previous slide.
-- <kbd>P</kbd>: Toggle the discreet Presenter Notes drawer (includes slide duration & talking points).
-- <kbd>Esc</kbd>: Exit fullscreen or dismiss open modals/drawers.
-- <kbd>Tab</kbd> / <kbd>Shift + Tab</kbd>: Full keyboard accessibility throughout the presentation shell.
+- <kbd>P</kbd>: Toggle the discreet **Presenter Notes** drawer (includes talking points and time allocation per slide).
+- <kbd>F</kbd> or Header Button: Toggle **Fullscreen Mode**.
+- <kbd>Esc</kbd>: Exit fullscreen or dismiss dropdown menus.
+- **Slide Jump**: Click the **Slide:** dropdown in the top header or the bottom progress stepper to jump directly to any slide.
 
 ---
 
@@ -63,10 +71,10 @@
 
 ### Installation
 ```bash
-# Navigate to the workspace directory
+# Navigate to workspace
 cd "/Users/tarun/Think and Grow "
 
-# Install dependencies (React, Vite, TypeScript, Tailwind CSS, Lucide React, Canvas Confetti)
+# Install dependencies
 npm install
 ```
 
@@ -76,11 +84,11 @@ npm run dev
 ```
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### Production Build
+### Building for Production
 ```bash
 npm run build
-npm run preview
 ```
+Generates optimized static assets in the `dist/` directory.
 
 ---
 
@@ -88,19 +96,21 @@ npm run preview
 
 1. **Before the session**:
    - Open [http://localhost:5173](http://localhost:5173).
-   - Click the pencil icon on Slide 1 to personalize the **Presenter Name**.
-   - Press <kbd>P</kbd> to open the Presenter Notes drawer on a secondary monitor or discreetly in the corner.
-   - Click the **Fullscreen** icon in the header for an immersive stage presentation.
-2. **During Demo A (The Bug Lab)**:
-   - Ask the audience: *"Who can spot why this gray helper text is dangerous in sunlight?"*
-   - Click the hotspots to let the audience vote on multiple-choice options.
-3. **During Demo B (Accessibility Detective)**:
-   - Challenge the audience: *"If our CI pipeline shows 100 on Lighthouse, can we ship?"*
-   - Demonstrate the manual keyboard challenge where the `<div>` button is unreachable.
-4. **During Demo C (Fix The Bugs)**:
-   - Click **Try Keyboard Navigation** and physically press <kbd>Tab</kbd> on your keyboard to demonstrate the high-contrast `:focus-visible` ring.
-5. **During the Closing**:
-   - Click **Copy Checklist** to share the 5-point checklist with the engineering team.
+   - Click the pencil icon on Slide 1 to customize the **Presenter Name**.
+   - Press <kbd>P</kbd> to open the Presenter Notes drawer.
+   - Click the **Fullscreen** button in the header.
+2. **Slide 03 (Bug Lab)**:
+   - Click each bug hotspot pin to progressively reveal the 5 hidden flaws.
+3. **Slide 05 (Keyboard Trap)**:
+   - Click **Simulate Tab Focus Sequence** to watch how focus travels (and where it gets trapped).
+4. **Slide 06 (Contrast Problem)**:
+   - Click **Simulate Sunlight Glare** to demonstrate how low-contrast text washes out in outdoor environments.
+5. **Slide 07 (Detective Desk)**:
+   - Click **Run Automated Audit Scan** to populate the simulated Lighthouse findings table.
+6. **Slide 08 (Repair Station)**:
+   - Use the **Split View**, **Broken Only**, and **Fixed Only** buttons to switch views and demonstrate the working high-contrast `:focus-visible` form.
+7. **Slide 10 (Takeaway)**:
+   - Click **Copy Checklist** to place the 5-point engineering checklist onto your clipboard for attendees.
 
 ---
 
@@ -109,10 +119,10 @@ npm run preview
 - **WCAG 1.3.1**: Info and Relationships (Programmatic `<label for="...">` and `id` linking)
 - **WCAG 1.4.1**: Use of Color (Never relying on color alone for error states)
 - **WCAG 1.4.3**: Contrast (Minimum 4.5:1 for normal body text, 3:1 for UI components)
-- **WCAG 2.1.1**: Keyboard (All controls reachable and operable without a mouse)
+- **WCAG 2.1.1**: Keyboard Accessible (All controls reachable and operable without a mouse)
 - **WCAG 2.4.7**: Focus Visible (Unmistakable `:focus-visible` outline indicators)
 - **WCAG 3.3.1 & 3.3.3**: Error Identification & Error Suggestion (`aria-describedby` & recovery advice)
-- **WCAG 4.1.2**: Name, Role, Value (Semantic elements over styled `<div>` elements)
+- **WCAG 4.1.2**: Name, Role, Value (Semantic elements over unannounced styled tags)
 
 ---
 
@@ -123,33 +133,34 @@ src/
 ├── assets/
 │   └── digiryte-logo.png         # Official company logo asset
 ├── components/
-│   ├── AchievementToast.tsx      # Polite aria-live notification toast
-│   ├── Footer.tsx                # Bottom stage navigation & keyboard hints
-│   ├── Header.tsx                # Branding, logo, score, and utility controls
-│   ├── PresenterNotes.tsx        # Discreet drawer for timing & talking points
+│   ├── Footer.tsx                # Presentation stage footer & slide navigation
+│   ├── Header.tsx                # Program branding, slide indicator, sound, fullscreen
+│   ├── PresenterNotes.tsx        # Presenter drawer with timing & talking points (P key)
 │   └── slides/
-│       ├── SlideWelcome.tsx      # Slide 1: Welcome & Mission Briefing
-│       ├── SlideChallenge.tsx    # Slide 2: The AI Paradox & mouse vs keyboard demo
-│       ├── SlideBugLab.tsx       # Slide 3 (Demo A): 5 clickable bug hotspots
-│       ├── SlideDetective.tsx    # Slide 4 (Demo B): Simulated audit & manual test
-│       ├── SlideFixTheBugs.tsx   # Slide 5 (Demo C): Split-screen live refactor
-│       ├── SlideFinalBoss.tsx    # Slide 6 (Demo D): 20s countdown rapid quiz
-│       └── SlideClosing.tsx      # Slide 7: Score summary, badge, & checklist
+│       ├── Slide01Opening.tsx        # Slide 01: Cinematic title & mission briefing
+│       ├── Slide02RealityCheck.tsx   # Slide 02: Split-screen visual vs reality
+│       ├── Slide03BugLab.tsx         # Slide 03: 5 bug pins on SaaS contact form
+│       ├── Slide04InvisibleLabel.tsx # Slide 04: Missing label magnified inspection
+│       ├── Slide05KeyboardTrap.tsx   # Slide 05: Animated Tab sequence & focus path
+│       ├── Slide06ContrastProblem.tsx# Slide 06: Luminance ratio & sunlight simulation
+│       ├── Slide07DetectiveDesk.tsx  # Slide 07: Browser inspection workspace & audit
+│       ├── Slide08RepairStation.tsx  # Slide 08: Split before/after & toggleable repair
+│       ├── Slide09TheProof.tsx       # Slide 09: 3-stage process & audit verification
+│       └── Slide10TheTakeaway.tsx    # Slide 10: Achievement emblem & 5-point checklist
 ├── constants/
-│   ├── branding.ts               # Single source of truth for Think and Grow RYTE
-│   ├── gameData.ts               # Diagnostic questions, bugs, fixes, and checklist
-│   └── slides.ts                 # Timing and presenter talking points per slide
+│   ├── branding.ts               # Centralized branding (THINK AND GROW RYTE)
+│   └── slides.ts                 # Metadata, 15m durations, talking points per slide
 ├── context/
-│   └── GameStateContext.tsx      # Score, solved items, missions, sound, persistence
+│   └── GameStateContext.tsx      # Presentation state provider & usePresentation hook
 ├── types/
-│   └── presentation.ts           # Strong TypeScript interfaces
+│   └── presentation.ts           # SlideMeta & SlideId TypeScript types
 ├── utils/
-│   └── sound.ts                  # Web Audio synthesizer for accessible sound cues
-├── App.tsx                       # Presentation shell & keyboard handler
-├── main.tsx                      # App entry point
-└── index.css                     # Tailwind directives, color tokens, animations
+│   └── sound.ts                  # Subtle Web Audio feedback synthesizer
+├── App.tsx                       # Slide router, keyboard navigation (<kbd>→</kbd>, <kbd>←</kbd>, <kbd>P</kbd>)
+├── main.tsx                      # Vite React entry point
+└── index.css                     # Design system, dot grid background, custom utilities
 ```
 
 ---
 
-*Think and Grow RYTE — Build fast. Test thoughtfully. Design for everyone.*
+*THINK AND GROW RYTE — "Build fast. Test thoughtfully. Design for everyone."*

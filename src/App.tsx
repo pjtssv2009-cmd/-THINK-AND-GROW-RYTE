@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
-import { GameStateProvider, useGameState } from './context/GameStateContext';
+import { PresentationProvider, usePresentation } from './context/GameStateContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { PresenterNotes } from './components/PresenterNotes';
-import { AchievementToast } from './components/AchievementToast';
 
-import { SlideWelcome } from './components/slides/SlideWelcome';
-import { SlideChallenge } from './components/slides/SlideChallenge';
-import { SlideBugLab } from './components/slides/SlideBugLab';
-import { SlideDetective } from './components/slides/SlideDetective';
-import { SlideFixTheBugs } from './components/slides/SlideFixTheBugs';
-import { SlideFinalBoss } from './components/slides/SlideFinalBoss';
-import { SlideClosing } from './components/slides/SlideClosing';
+import { Slide01Opening } from './components/slides/Slide01Opening';
+import { Slide02RealityCheck } from './components/slides/Slide02RealityCheck';
+import { Slide03BugLab } from './components/slides/Slide03BugLab';
+import { Slide04InvisibleLabel } from './components/slides/Slide04InvisibleLabel';
+import { Slide05KeyboardTrap } from './components/slides/Slide05KeyboardTrap';
+import { Slide06ContrastProblem } from './components/slides/Slide06ContrastProblem';
+import { Slide07DetectiveDesk } from './components/slides/Slide07DetectiveDesk';
+import { Slide08RepairStation } from './components/slides/Slide08RepairStation';
+import { Slide09TheProof } from './components/slides/Slide09TheProof';
+import { Slide10TheTakeaway } from './components/slides/Slide10TheTakeaway';
 
 const PresentationShell: React.FC = () => {
   const { 
@@ -19,7 +21,7 @@ const PresentationShell: React.FC = () => {
     goToNextSlide, 
     goToPrevSlide, 
     togglePresenterNotes 
-  } = useGameState();
+  } = usePresentation();
 
   // Keyboard navigation handler with input guard
   useEffect(() => {
@@ -36,14 +38,13 @@ const PresentationShell: React.FC = () => {
         return;
       }
 
-      if (e.key === 'ArrowRight') {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
         e.preventDefault();
         goToNextSlide();
       } else if (e.key === 'ArrowLeft') {
         e.preventDefault();
         goToPrevSlide();
       } else if (e.key === 'p' || e.key === 'P') {
-        // Toggle presenter notes
         togglePresenterNotes();
       }
     };
@@ -52,30 +53,36 @@ const PresentationShell: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [goToNextSlide, goToPrevSlide, togglePresenterNotes]);
 
-  // Render current slide based on currentSlideIndex
+  // Render the current slide (1 of 10)
   const renderSlide = () => {
     switch (currentSlideIndex) {
       case 0:
-        return <SlideWelcome />;
+        return <Slide01Opening />;
       case 1:
-        return <SlideChallenge />;
+        return <Slide02RealityCheck />;
       case 2:
-        return <SlideBugLab />;
+        return <Slide03BugLab />;
       case 3:
-        return <SlideDetective />;
+        return <Slide04InvisibleLabel />;
       case 4:
-        return <SlideFixTheBugs />;
+        return <Slide05KeyboardTrap />;
       case 5:
-        return <SlideFinalBoss />;
+        return <Slide06ContrastProblem />;
       case 6:
-        return <SlideClosing />;
+        return <Slide07DetectiveDesk />;
+      case 7:
+        return <Slide08RepairStation />;
+      case 8:
+        return <Slide09TheProof />;
+      case 9:
+        return <Slide10TheTakeaway />;
       default:
-        return <SlideWelcome />;
+        return <Slide01Opening />;
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] text-[#172033]">
+    <div className="min-h-screen flex flex-col bg-[#F7F8FC] text-[#172033] antialiased selection:bg-[#5B5CE2] selection:text-white">
       
       {/* Accessible Skip Link */}
       <a
@@ -92,7 +99,7 @@ const PresentationShell: React.FC = () => {
       <main 
         id="main-presentation-content" 
         tabIndex={-1}
-        className="flex-1 flex flex-col justify-center px-2 sm:px-4 py-2 sm:py-4 focus:outline-none"
+        className="flex-1 flex flex-col justify-center px-2 sm:px-6 py-4 focus:outline-none"
       >
         <div className="w-full">
           {renderSlide()}
@@ -102,9 +109,8 @@ const PresentationShell: React.FC = () => {
       {/* Presentation Bottom Navigation */}
       <Footer />
 
-      {/* Overlays and Presenter Tools */}
+      {/* Discreet Presenter Notes Overlay */}
       <PresenterNotes />
-      <AchievementToast />
 
     </div>
   );
@@ -112,8 +118,8 @@ const PresentationShell: React.FC = () => {
 
 export default function App() {
   return (
-    <GameStateProvider>
+    <PresentationProvider>
       <PresentationShell />
-    </GameStateProvider>
+    </PresentationProvider>
   );
 }
